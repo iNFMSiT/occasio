@@ -1,0 +1,10 @@
+Injected script for US shard loaded.
+injectedMethodEU.js:1 Injected script for EU shard loaded.
+main.js:56 Uncaught ReferenceError: apiSettingsInstance is not defined
+    at CustomCardsApp.render (main.js:56:25)
+    at CustomCardsApp.init (main.js:35:10)
+    at main.js:397:5
+render @ main.js:56
+init @ main.js:35
+(anonymous) @ main.js:397Understand this error
+content.js:4 content页面注入成功
