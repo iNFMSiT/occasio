@@ -1,0 +1,41 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - generic [ref=e5]:
+        - heading "Occasio" [level=1] [ref=e7] [cursor=pointer]
+        - button "History" [ref=e9]:
+          - img [ref=e10]
+          - generic [ref=e13]: History
+    - main [ref=e14]:
+      - generic [ref=e15]:
+        - generic [ref=e16]:
+          - heading "Gifts they'll never forget" [level=1] [ref=e26]
+          - paragraph [ref=e27]: Personalized images and songs, generated for any occasion. Pick what you want to create.
+        - generic [ref=e28]:
+          - button "Custom AI Images Generate personalized images in wild art styles Get Started" [ref=e31]:
+            - img [ref=e33]
+            - heading "Custom AI Images" [level=3] [ref=e36]
+            - paragraph [ref=e37]: Generate personalized images in wild art styles
+            - generic [ref=e38]:
+              - text: Get Started
+              - img [ref=e39]
+          - button "Custom AI Song Generate a personalized song with custom lyrics Get Started" [ref=e43]:
+            - img [ref=e45]
+            - heading "Custom AI Song" [level=3] [ref=e49]
+            - paragraph [ref=e50]: Generate a personalized song with custom lyrics
+            - generic [ref=e51]:
+              - text: Get Started
+              - img [ref=e52]
+        - button "Not sure where to start? Browse the Hall of Fame" [ref=e55]:
+          - img [ref=e56]
+          - text: Not sure where to start?
+          - generic [ref=e59]: Browse the Hall of Fame
+          - img [ref=e60]
+  - generic [ref=e62]:
+    - generic [ref=e63]:
+      - img [ref=e64]
+      - button "Original" [ref=e70]
+      - button "Confetti" [active] [ref=e71]
+      - button "Velvet Studio" [ref=e72]
+      - button "Pop Party" [ref=e73]
+    - generic [ref=e74]: preview only

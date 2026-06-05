@@ -1,0 +1,11 @@
+.wm {
+  font-family: var(--occ-font-display);
+  font-weight: 700;
+  letter-spacing: -1.5px;
+  line-height: 1;
+  background: var(--occ-grad-wordmark);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}

@@ -1,0 +1,32 @@
+.pola {
+  flex: 0 0 auto;
+  width: 126px;
+  background: #fffaf0;
+  padding: 9px 9px 30px;
+  border-radius: 5px;
+  box-shadow: 0 8px 20px rgba(60, 40, 30, 0.16);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.photo {
+  width: 108px;
+  height: 94px;
+  border-radius: 3px;
+  background-size: cover;
+  background-position: center;
+}
+
+.caption {
+  font-family: var(--occ-font-serif);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--occ-ink-soft);
+  text-align: center;
+  margin-top: 9px;
+}
+
+.pola:not(.noHover):hover {
+  transform: rotate(0deg) scale(1.07) translateY(-7px) !important;
+  box-shadow: 0 16px 34px rgba(60, 40, 30, 0.26);
+  z-index: 9;
+}

@@ -1,0 +1,74 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - button "Back to gift selection" [ref=e41]:
+          - img [ref=e42]
+        - heading "Occasio" [level=1] [ref=e7] [cursor=pointer]
+      - generic [ref=e8]:
+        - button "History" [ref=e9]:
+          - img [ref=e10]
+          - generic [ref=e13]: History
+        - generic [ref=e44]:
+          - img [ref=e45]
+          - text: Custom AI Images
+  - main [ref=e14]:
+    - generic [ref=e48]:
+      - button "Nano Banana" [ref=e51]:
+        - img [ref=e52]
+        - generic [ref=e54]: Nano Banana
+      - generic [ref=e56]:
+        - generic [ref=e57]:
+          - img [ref=e58]
+          - generic [ref=e61]: Upload
+        - generic [ref=e63]:
+          - img [ref=e64]
+          - generic [ref=e67]: Customize
+        - generic [ref=e69]:
+          - img [ref=e70]
+          - generic [ref=e73]: Generate
+        - generic [ref=e75]:
+          - img [ref=e76]
+          - generic [ref=e81]: Gallery
+      - generic [ref=e311]:
+        - generic [ref=e312]:
+          - heading "Generate" [level=2] [ref=e313]
+          - paragraph [ref=e314]: Pick how many images you want, then hit generate.
+        - generic [ref=e315]:
+          - paragraph [ref=e316]: How many images?
+          - generic [ref=e317]:
+            - button "1 Single image" [ref=e318]:
+              - generic [ref=e319]: "1"
+              - generic [ref=e320]: Single image
+            - button "2 A pair" [ref=e321]:
+              - generic [ref=e322]: "2"
+              - generic [ref=e323]: A pair
+            - button "4 Small set" [ref=e324]:
+              - generic [ref=e325]: "4"
+              - generic [ref=e326]: Small set
+            - button "6 Mini deck" [ref=e327]:
+              - generic [ref=e328]: "6"
+              - generic [ref=e329]: Mini deck
+            - button "8 Full set" [ref=e330]:
+              - generic [ref=e331]: "8"
+              - generic [ref=e332]: Full set
+          - paragraph [ref=e333]: Card deck, gift set
+          - generic [ref=e335]:
+            - text: "Est. cost:"
+            - strong [ref=e336]: ~$0.24
+            - text: with Nano Banana
+        - button "Preview Prompts" [ref=e339]:
+          - img [ref=e340]
+          - text: Preview Prompts
+        - generic [ref=e344]:
+          - img [ref=e345]
+          - generic [ref=e347]:
+            - text: Using
+            - strong [ref=e348]: Nano Banana
+        - generic [ref=e349]:
+          - button "Back" [ref=e350]:
+            - img [ref=e351]
+            - text: Back
+          - button "Generate Preview" [ref=e354]:
+            - img [ref=e355]
+            - text: Generate Preview

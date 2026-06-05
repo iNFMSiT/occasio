@@ -1,0 +1,86 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - button "Back to gift selection" [ref=e181]:
+          - img [ref=e182]
+        - heading "Occasio" [level=1] [ref=e7] [cursor=pointer]
+      - generic [ref=e8]:
+        - button "History" [ref=e9]:
+          - img [ref=e10]
+          - generic [ref=e13]: History
+        - generic [ref=e184]:
+          - img [ref=e185]
+          - text: Custom AI Images
+  - main [ref=e14]:
+    - generic [ref=e188]:
+      - generic [ref=e190]:
+        - button "Nano Banana" [active] [ref=e191]:
+          - img [ref=e192]
+          - generic [ref=e194]: Nano Banana
+        - generic [ref=e240]:
+          - generic [ref=e241]:
+            - paragraph [ref=e242]:
+              - img [ref=e243]
+              - text: Nanobanana Model
+            - generic [ref=e245]:
+              - button "OG Nano Banana OG ~$0.01/img Original model, fast & cheap Retiring March 31, 2026" [ref=e246]:
+                - generic [ref=e247]:
+                  - generic [ref=e248]:
+                    - generic [ref=e249]: OG
+                    - paragraph [ref=e250]: Nano Banana OG
+                  - generic [ref=e251]: ~$0.01/img
+                - paragraph [ref=e252]: Original model, fast & cheap
+                - generic [ref=e253]:
+                  - img [ref=e254]
+                  - generic [ref=e256]: Retiring March 31, 2026
+              - button "2.5 Nano Banana ~$0.04/img Best speed/quality balance, up to 2K" [ref=e257]:
+                - generic [ref=e258]:
+                  - generic [ref=e259]:
+                    - generic [ref=e260]: "2.5"
+                    - paragraph [ref=e261]: Nano Banana
+                  - generic [ref=e262]: ~$0.04/img
+                - paragraph [ref=e263]: Best speed/quality balance, up to 2K
+              - button "PRO Nano Banana Pro ~$0.13/img Highest quality, 4K, 14 ref images" [ref=e264]:
+                - generic [ref=e265]:
+                  - generic [ref=e266]:
+                    - generic [ref=e267]: PRO
+                    - paragraph [ref=e268]: Nano Banana Pro
+                  - generic [ref=e269]: ~$0.13/img
+                - paragraph [ref=e270]: Highest quality, 4K, 14 ref images
+            - paragraph [ref=e272]:
+              - text: "Estimated cost (6 images):"
+              - strong [ref=e273]: ~$0.24
+          - generic [ref=e274]:
+            - generic [ref=e275]:
+              - img [ref=e276]
+              - generic [ref=e278]: Dev Mode (mock data)
+            - button [ref=e279]
+          - generic [ref=e281]:
+            - img [ref=e282]
+            - generic [ref=e286]: API key configured
+      - generic [ref=e196]:
+        - generic [ref=e197]:
+          - img [ref=e198]
+          - generic [ref=e201]: Upload
+        - generic [ref=e203]:
+          - img [ref=e204]
+          - generic [ref=e207]: Customize
+        - generic [ref=e209]:
+          - img [ref=e210]
+          - generic [ref=e213]: Generate
+        - generic [ref=e215]:
+          - img [ref=e216]
+          - generic [ref=e221]: Gallery
+      - generic [ref=e222]:
+        - generic [ref=e223]:
+          - heading "Upload Your Friend's Photos" [level=2] [ref=e224]
+          - paragraph [ref=e225]: Add 1-2 clear photos. We'll use these to create personalized images in wild styles.
+        - generic [ref=e227] [cursor=pointer]:
+          - img [ref=e229]
+          - generic [ref=e232]:
+            - paragraph [ref=e233]: Drag & drop photos here
+            - paragraph [ref=e234]: or click to browse (JPEG, PNG, WebP, HEIC · max 10MB)
+        - button "Continue to Survey" [disabled] [ref=e236]:
+          - text: Continue to Survey
+          - img [ref=e237]

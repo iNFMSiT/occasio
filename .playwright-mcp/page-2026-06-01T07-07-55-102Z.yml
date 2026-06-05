@@ -1,0 +1,32 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - heading "Occasio" [level=1] [ref=e7] [cursor=pointer]
+      - button "History" [ref=e9]:
+        - img [ref=e10]
+        - generic [ref=e13]: History
+  - main [ref=e14]:
+    - generic [ref=e15]:
+      - generic [ref=e16]:
+        - heading "Create a Gift" [level=1] [ref=e17]
+        - paragraph [ref=e18]: Choose what kind of personalized gift you want to create. Each uses AI to generate something truly unique.
+      - generic [ref=e19]:
+        - button "Custom AI Images Generate personalized images in wild art styles Get Started" [ref=e20]:
+          - img [ref=e22]
+          - heading "Custom AI Images" [level=3] [ref=e25]
+          - paragraph [ref=e26]: Generate personalized images in wild art styles
+          - generic [ref=e27]:
+            - text: Get Started
+            - img [ref=e28]
+        - button "Custom AI Song Generate a personalized song with custom lyrics Get Started" [ref=e30]:
+          - img [ref=e32]
+          - heading "Custom AI Song" [level=3] [ref=e36]
+          - paragraph [ref=e37]: Generate a personalized song with custom lyrics
+          - generic [ref=e38]:
+            - text: Get Started
+            - img [ref=e39]
+      - button "Not sure where to start? Browse the Hall of Fame" [ref=e42]:
+        - img [ref=e43]
+        - text: Not sure where to start?
+        - generic [ref=e46]: Browse the Hall of Fame
+        - img [ref=e47]

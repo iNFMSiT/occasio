@@ -1,0 +1,74 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - button "Back to gift selection" [ref=e41]:
+          - img [ref=e42]
+        - heading "Occasio" [level=1] [ref=e7] [cursor=pointer]
+      - generic [ref=e8]:
+        - button "History" [ref=e9]:
+          - img [ref=e10]
+          - generic [ref=e13]: History
+        - generic [ref=e44]:
+          - img [ref=e45]
+          - text: Custom AI Images
+  - main [ref=e14]:
+    - generic [ref=e48]:
+      - button "Nano Banana" [ref=e51]:
+        - img [ref=e52]
+        - generic [ref=e54]: Nano Banana
+      - generic [ref=e56]:
+        - generic [ref=e57]:
+          - img [ref=e58]
+          - generic [ref=e61]: Upload
+        - generic [ref=e63]:
+          - img [ref=e64]
+          - generic [ref=e67]: Customize
+        - generic [ref=e69]:
+          - img [ref=e70]
+          - generic [ref=e73]: Generate
+        - generic [ref=e75]:
+          - img [ref=e76]
+          - generic [ref=e81]: Gallery
+      - generic [ref=e311]:
+        - generic [ref=e312]:
+          - heading "Generate" [level=2] [ref=e313]
+          - paragraph [ref=e314]: Generating preview...
+        - generic [ref=e440]:
+          - button "Hide Prompts" [ref=e442]:
+            - img [ref=e443]
+            - text: Hide Prompts
+          - generic [ref=e446]:
+            - 'button "Card #1 — watercolor · historical" [ref=e448]':
+              - img [ref=e449]
+              - generic [ref=e452]: "Card #1 — watercolor · historical"
+              - img [ref=e454]
+            - 'button "Card #2 — watercolor · historical" [ref=e457]':
+              - img [ref=e458]
+              - generic [ref=e461]: "Card #2 — watercolor · historical"
+              - img [ref=e463]
+            - 'button "Card #3 — watercolor · historical" [ref=e466]':
+              - img [ref=e467]
+              - generic [ref=e470]: "Card #3 — watercolor · historical"
+              - img [ref=e472]
+            - 'button "Card #4 — watercolor · historical" [ref=e475]':
+              - img [ref=e476]
+              - generic [ref=e479]: "Card #4 — watercolor · historical"
+              - img [ref=e481]
+            - 'button "Card #5 — watercolor · historical" [ref=e484]':
+              - img [ref=e485]
+              - generic [ref=e488]: "Card #5 — watercolor · historical"
+              - img [ref=e490]
+            - 'button "Card #6 — watercolor · historical" [ref=e493]':
+              - img [ref=e494]
+              - generic [ref=e497]: "Card #6 — watercolor · historical"
+              - img [ref=e499]
+        - generic [ref=e344]:
+          - img [ref=e345]
+          - generic [ref=e347]:
+            - text: Using
+            - strong [ref=e348]: Nano Banana
+        - paragraph [ref=e503]: 0 / 0 images
+        - button "Back" [disabled] [ref=e350]:
+          - img [ref=e351]
+          - text: Back

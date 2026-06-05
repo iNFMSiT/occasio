@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Zap, Settings, Monitor, Wifi, WifiOff, AlertTriangle } from 'lucide-react';
-import { useWizard } from '../../context/WizardContext.jsx';
+import { useGiftFlow } from '../../features/gifts/GiftFlowContext.jsx';
 import { isApiConfigured, GEMINI_CONFIG } from '../../config/gemini.config.js';
 
 export default function ModelToggle() {
-  const { settings, dispatch } = useWizard();
+  const { settings, dispatch } = useGiftFlow();
   const [open, setOpen] = useState(false);
 
   const apiReady = isApiConfigured();

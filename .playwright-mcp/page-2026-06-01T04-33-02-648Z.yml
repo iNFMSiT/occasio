@@ -1,0 +1,74 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - button "Back to gift selection" [ref=e41]:
+          - img [ref=e42]
+        - heading "Occasio" [level=1] [ref=e7] [cursor=pointer]
+      - generic [ref=e8]:
+        - button "History" [ref=e9]:
+          - img [ref=e10]
+          - generic [ref=e13]: History
+        - generic [ref=e44]:
+          - img [ref=e45]
+          - text: Custom AI Song
+  - main [ref=e14]:
+    - generic [ref=e49]:
+      - generic [ref=e50]:
+        - generic [ref=e51]:
+          - img [ref=e52]
+          - generic [ref=e55]: Customize
+        - generic [ref=e57]:
+          - img [ref=e58]
+          - generic [ref=e62]: Generate
+        - generic [ref=e64]:
+          - img [ref=e65]
+          - generic [ref=e67]: Preview
+      - generic [ref=e192]:
+        - generic [ref=e193]:
+          - heading "Generate Songs" [level=2] [ref=e194]
+          - paragraph [ref=e195]: Choose how many song variations, then hit generate.
+        - generic [ref=e196]:
+          - paragraph [ref=e197]: How many song variations?
+          - generic [ref=e198]:
+            - button "1 Single song" [ref=e199]:
+              - generic [ref=e200]: "1"
+              - generic [ref=e201]: Single song
+            - button "2 Two variations" [ref=e202]:
+              - generic [ref=e203]: "2"
+              - generic [ref=e204]: Two variations
+            - button "3 Three options" [ref=e205]:
+              - generic [ref=e206]: "3"
+              - generic [ref=e207]: Three options
+        - generic [ref=e208]:
+          - button "Hide Prompts" [active] [ref=e223]:
+            - img [ref=e211]
+            - text: Hide Prompts
+          - generic [ref=e224]:
+            - generic [ref=e225]:
+              - 'button "Song #1 — folk Copy" [ref=e226]':
+                - img [ref=e227]
+                - generic [ref=e230]: "Song #1 — folk"
+                - generic [ref=e231]:
+                  - button "Copy" [ref=e232]:
+                    - img [ref=e233]
+                    - text: Copy
+                  - img [ref=e236]
+              - generic [ref=e238]:
+                - generic [ref=e239]: "Genre: folk"
+                - generic [ref=e240]: "What it's about: for my brother who loves spicy ramen and quotes Shrek constantly"
+                - generic [ref=e241]: "Vibe: chill"
+                - generic [ref=e242]: "Tempo: upbeat, fast tempo"
+                - generic [ref=e243]: "Tone: balanced mix of fun and heartfelt"
+                - generic [ref=e244]: "Mood: deeply emotional, touching, sentimental"
+            - 'button "Song #2 — folk" [ref=e246]':
+              - img [ref=e247]
+              - generic [ref=e250]: "Song #2 — folk"
+              - img [ref=e252]
+        - generic [ref=e214]:
+          - button "Back" [ref=e215]:
+            - img [ref=e216]
+            - text: Back
+          - button "Generate 2 Songs" [ref=e219]:
+            - img [ref=e220]
+            - text: Generate 2 Songs

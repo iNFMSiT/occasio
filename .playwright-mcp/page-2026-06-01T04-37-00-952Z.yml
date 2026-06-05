@@ -1,0 +1,55 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - generic [ref=e5]:
+        - generic [ref=e6]:
+          - button "Back to gift selection" [ref=e41]:
+            - img [ref=e42]
+          - heading "Occasio" [level=1] [ref=e7] [cursor=pointer]
+        - generic [ref=e8]:
+          - button "History" [ref=e9]:
+            - img [ref=e10]
+            - generic [ref=e13]: History
+          - generic [ref=e44]:
+            - img [ref=e45]
+            - text: Custom AI Images
+    - main [ref=e14]:
+      - generic [ref=e48]:
+        - button "Nano Banana" [ref=e51]:
+          - img [ref=e52]
+          - generic [ref=e54]: Nano Banana
+        - generic [ref=e56]:
+          - generic [ref=e57]:
+            - img [ref=e58]
+            - generic [ref=e61]: Upload
+          - generic [ref=e63]:
+            - img [ref=e64]
+            - generic [ref=e67]: Customize
+          - generic [ref=e69]:
+            - img [ref=e70]
+            - generic [ref=e73]: Generate
+          - generic [ref=e75]:
+            - img [ref=e76]
+            - generic [ref=e81]: Gallery
+        - generic [ref=e82]:
+          - generic [ref=e83]:
+            - heading "Upload Your Friend's Photos" [level=2] [ref=e84]
+            - paragraph [ref=e85]: Add 1-2 clear photos. We'll use these to create personalized images in wild styles.
+          - generic [ref=e87] [cursor=pointer]:
+            - img [ref=e89]
+            - generic [ref=e92]:
+              - paragraph [ref=e93]: Drag & drop photos here
+              - paragraph [ref=e94]: or click to browse (JPEG, PNG, WebP, HEIC · max 10MB)
+          - generic [ref=e100]:
+            - img "testface.png" [ref=e101]
+            - button [ref=e102]:
+              - img [ref=e103]
+            - generic [ref=e106]: Primary
+          - button "Continue to Survey" [ref=e96]:
+            - text: Continue to Survey
+            - img [ref=e107]
+  - generic [ref=e110]:
+    - img [ref=e111]
+    - paragraph [ref=e113]: "{\"error\":{\"code\":400,\"message\":\"Unable to process input image. Please retry or report in https://developers.generativeai.google/guide/troubleshooting\",\"status\":\"INVALID_ARGUMENT\"}}"
+    - button [ref=e114]:
+      - img [ref=e115]

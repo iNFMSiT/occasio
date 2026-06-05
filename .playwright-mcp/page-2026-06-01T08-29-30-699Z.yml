@@ -1,0 +1,124 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - heading "Occasio" [level=1] [ref=e7] [cursor=pointer]
+      - button "History" [ref=e9]:
+        - img [ref=e10]
+        - generic [ref=e13]: History
+  - main [ref=e14]:
+    - generic [ref=e49]:
+      - generic [ref=e50]:
+        - button "Back" [ref=e51]:
+          - img [ref=e52]
+          - text: Back
+        - heading "Hall of Fame" [level=1] [ref=e54]
+        - paragraph [ref=e55]: Get inspired by what others have made — then start from any look and make it your own.
+      - generic [ref=e56]:
+        - generic [ref=e57]:
+          - img [ref=e58]
+          - heading "Start from one of these" [level=2] [ref=e61]
+        - generic [ref=e62]:
+          - button "All" [ref=e63]
+          - button "Birthday" [ref=e64]
+          - button "Just Because" [ref=e65]
+          - button "Graduation" [ref=e66]
+        - generic [ref=e67]:
+          - generic [ref=e68]:
+            - img "Cosmic Explorer" [ref=e70]
+            - generic [ref=e71]:
+              - paragraph [ref=e72]: Cosmic Explorer
+              - paragraph [ref=e73]: Birthday
+              - button "Make this" [ref=e74]:
+                - img [ref=e75]
+                - text: Make this
+          - generic [ref=e78]:
+            - img "Caped Legend" [ref=e80]
+            - generic [ref=e81]:
+              - paragraph [ref=e82]: Caped Legend
+              - paragraph [ref=e83]: Just Because
+              - button "Make this" [ref=e84]:
+                - img [ref=e85]
+                - text: Make this
+          - generic [ref=e88]:
+            - img "Arcane Sorcerer" [ref=e90]
+            - generic [ref=e91]:
+              - paragraph [ref=e92]: Arcane Sorcerer
+              - paragraph [ref=e93]: Graduation
+              - button "Make this" [ref=e94]:
+                - img [ref=e95]
+                - text: Make this
+          - generic [ref=e98]:
+            - img "Anime Warrior" [ref=e100]
+            - generic [ref=e101]:
+              - paragraph [ref=e102]: Anime Warrior
+              - paragraph [ref=e103]: Just Because
+              - button "Make this" [ref=e104]:
+                - img [ref=e105]
+                - text: Make this
+          - generic [ref=e108]:
+            - img "Rock Legend" [ref=e110]
+            - generic [ref=e111]:
+              - paragraph [ref=e112]: Rock Legend
+              - paragraph [ref=e113]: Birthday
+              - button "Make this" [ref=e114]:
+                - img [ref=e115]
+                - text: Make this
+          - generic [ref=e118]:
+            - img "Slam Dunk" [ref=e120]
+            - generic [ref=e121]:
+              - paragraph [ref=e122]: Slam Dunk
+              - paragraph [ref=e123]: Just Because
+              - button "Make this" [ref=e124]:
+                - img [ref=e125]
+                - text: Make this
+      - generic [ref=e128]:
+        - heading "More from the gallery" [level=2] [ref=e129]
+        - generic [ref=e130]:
+          - generic [ref=e131]:
+            - img "Astronaut" [ref=e133]
+            - paragraph [ref=e135]: Astronaut
+          - generic [ref=e136]:
+            - img "Superhero" [ref=e138]
+            - paragraph [ref=e140]: Superhero
+          - generic [ref=e141]:
+            - img "Space Knight" [ref=e143]
+            - paragraph [ref=e145]: Space Knight
+          - generic [ref=e146]:
+            - img "Enter the Matrix" [ref=e148]
+            - paragraph [ref=e150]: Enter the Matrix
+          - generic [ref=e151]:
+            - img "Armored Hero" [ref=e153]
+            - paragraph [ref=e155]: Armored Hero
+          - generic [ref=e156]:
+            - img "Wizard" [ref=e158]
+            - paragraph [ref=e160]: Wizard
+          - generic [ref=e161]:
+            - img "Firefighter" [ref=e163]
+            - paragraph [ref=e165]: Firefighter
+          - generic [ref=e166]:
+            - img "Rap Icon" [ref=e168]
+            - paragraph [ref=e170]: Rap Icon
+          - generic [ref=e171]:
+            - img "Cartoon Cutout" [ref=e173]
+            - paragraph [ref=e175]: Cartoon Cutout
+          - generic [ref=e176]:
+            - img "Robot Overlord" [ref=e178]
+            - paragraph [ref=e180]: Robot Overlord
+          - generic [ref=e181]:
+            - img "Arm Wrestle" [ref=e183]
+            - paragraph [ref=e185]: Arm Wrestle
+          - generic [ref=e186]:
+            - img "Centaur" [ref=e188]
+            - paragraph [ref=e190]: Centaur
+          - generic [ref=e191]:
+            - img "Shark Rider" [ref=e193]
+            - paragraph [ref=e195]: Shark Rider
+          - generic [ref=e196]:
+            - img "Action Hero" [ref=e198]
+            - paragraph [ref=e200]: Action Hero
+          - generic [ref=e201]:
+            - img "Sea Captain" [ref=e203]
+            - paragraph [ref=e205]: Sea Captain
+          - generic [ref=e206]:
+            - img "Trooper" [ref=e208]
+            - paragraph [ref=e210]: Trooper

@@ -1,0 +1,90 @@
+.stage {
+  /* Paper Keepsake palette — these custom props cascade to every descendant
+     (carousel, polaroids, card, wordmark). Kept self-contained so the hero owns
+     its warm identity regardless of the app theme. */
+  --occ-stage-bg: linear-gradient(135deg, #fbf3e7 0%, #f7e7d4 55%, #f9e6ec 100%);
+  --occ-kicker: #b07a4e;
+  --occ-ink-soft: #8a6a55;
+  --occ-font-serif: 'Fraunces', Georgia, serif;
+  --occ-font-display: 'Fraunces', Georgia, serif;
+  --occ-grad-cta: linear-gradient(135deg, #ff9f45 0%, #f25ca2 100%);
+  --occ-grad-wordmark: linear-gradient(120deg, #7c3aed 0%, #db2777 50%, #f59e0b 100%);
+
+  position: relative;
+  width: 100%;
+  height: 440px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--occ-stage-bg);
+}
+
+.center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.card {
+  background: rgba(251, 243, 231, 0.76);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  padding: 22px 36px;
+  border-radius: 20px;
+  text-align: center;
+  pointer-events: auto;
+}
+
+.kicker {
+  font-size: 12px;
+  letter-spacing: 5px;
+  font-weight: 500;
+  color: var(--occ-kicker);
+  margin: 0 0 11px;
+}
+
+.tagline {
+  font-family: var(--occ-font-serif);
+  font-style: italic;
+  font-size: 23px;
+  color: #6a4a3a;
+  margin: 7px 0 0;
+}
+
+.cta {
+  margin-top: 17px;
+  border: none;
+  border-radius: 999px;
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #fff;
+  cursor: pointer;
+  background: var(--occ-grad-cta);
+  box-shadow: 0 6px 16px rgba(200, 120, 60, 0.3);
+  transition: transform 0.15s ease;
+}
+.cta:active { transform: scale(0.96); }
+
+.reveal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 30;
+  pointer-events: none;
+  animation: occ-develop 2.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes occ-develop {
+  0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.4) rotate(-5deg); }
+  18%  { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(-3deg); }
+  66%  { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(-3deg); }
+  100% { opacity: 0; transform: translate(-50%, -160%) scale(0.92) rotate(2deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { animation-duration: 0.01s; }
+}

@@ -16,17 +16,89 @@
   --color-text-muted: #9b97b0;
 }
 
+/* Runtime-swappable surface: the base background + display font. Themes below
+   override these (and the --color-* tokens) per [data-theme]. Defaults match the
+   original look so nothing changes until a direction is selected. */
+:root {
+  --app-bg: linear-gradient(135deg, #0f0c1a 0%, #1e1b2e 50%, #161229 100%);
+  --font-display: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* === Candidate visual directions (preview via ThemeSwitcher) ===
+   Each overrides the 12 @theme color tokens + the base background + display font.
+   Because every component references these tokens, the whole app re-themes. */
+
+/* A — Confetti: warm, festive, light */
+[data-theme='confetti'] {
+  --color-brand: #f2547d;
+  --color-brand-light: #ff7da0;
+  --color-brand-dark: #d63a66;
+  --color-surface: #fffaf3;
+  --color-surface-light: #fff1e6;
+  --color-surface-lighter: #ecd6c4;
+  --color-accent: #f4b740;
+  --color-accent-light: #ffcf6b;
+  --color-success: #10b981;
+  --color-danger: #ef4444;
+  --color-text: #2b2235;
+  --color-text-muted: #8a7e92;
+  --app-bg: linear-gradient(135deg, #fdf8f1 0%, #fbeede 50%, #fce9ec 100%);
+  --font-display: 'Fraunces', 'Inter', serif;
+}
+
+/* B — Velvet Studio: premium, refined dark */
+[data-theme='velvet'] {
+  --color-brand: #e5c07b;
+  --color-brand-light: #f0d2a0;
+  --color-brand-dark: #c9a35e;
+  --color-surface: #1b1622;
+  --color-surface-light: #251f30;
+  --color-surface-lighter: #36304a;
+  --color-accent: #e8a0a8;
+  --color-accent-light: #f2bec4;
+  --color-success: #6bbf8a;
+  --color-danger: #e57373;
+  --color-text: #f5f1ea;
+  --color-text-muted: #a89fb0;
+  --app-bg: linear-gradient(135deg, #15121c 0%, #1b1622 50%, #120f18 100%);
+  --font-display: 'Playfair Display', 'Inter', serif;
+}
+
+/* C — Pop Party: vibrant, bold, playful */
+[data-theme='pop'] {
+  --color-brand: #6c5bff;
+  --color-brand-light: #9d8cff;
+  --color-brand-dark: #4b38e0;
+  --color-surface: #161147;
+  --color-surface-light: #221c5c;
+  --color-surface-lighter: #332c77;
+  --color-accent: #ff4da6;
+  --color-accent-light: #ff7dc0;
+  --color-success: #9fe000;
+  --color-danger: #ff5d73;
+  --color-text: #f3f1ff;
+  --color-text-muted: #a39dd0;
+  --app-bg: linear-gradient(135deg, #0e0b2a 0%, #161147 50%, #0b0920 100%);
+  --font-display: 'Space Grotesk', 'Inter', sans-serif;
+}
+
 /* Base styles */
 body {
   margin: 0;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background: linear-gradient(135deg, #0f0c1a 0%, #1e1b2e 50%, #161229 100%);
+  background: var(--app-bg);
   color: var(--color-text);
   min-height: 100vh;
+  transition: background 0.5s ease, color 0.3s ease;
 }
 
 #app {
   min-height: 100vh;
+}
+
+/* Display font for hero headings — driven by the active theme. */
+.font-display {
+  font-family: var(--font-display);
 }
 
 /* Animations */
@@ -74,7 +146,7 @@ body {
 }
 .card-hover:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 30px rgba(124, 58, 237, 0.25);
+  box-shadow: 0 8px 30px color-mix(in srgb, var(--color-brand) 28%, transparent);
 }
 
 /* Custom scrollbar */

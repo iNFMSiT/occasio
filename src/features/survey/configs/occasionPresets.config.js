@@ -1,0 +1,70 @@
+export const OCCASIONS = [
+  { id: 'birthday', label: 'Birthday', emoji: '\u{1F382}' },
+  { id: 'anniversary', label: 'Anniversary', emoji: '\u{1F495}' },
+  { id: 'graduation', label: 'Graduation', emoji: '\u{1F393}' },
+  { id: 'baby-shower', label: 'Baby Shower', emoji: '\u{1F476}' },
+  { id: 'wedding', label: 'Wedding', emoji: '\u{1F492}' },
+  { id: 'retirement', label: 'Retirement', emoji: '\u{1F3D6}\u{FE0F}' },
+  { id: 'promotion', label: 'Promotion', emoji: '\u{1F680}' },
+  { id: 'just-because', label: 'Just Because', emoji: '\u{1F49B}' },
+  { id: 'custom', label: 'Custom...', emoji: '\u{270F}\u{FE0F}' },
+];
+
+export const OCCASION_PRESETS = {
+  birthday: {
+    moodSliders: { energy: 0.75, sentiment: 0.8, humor: 0.65 },
+    suggestedGenres: ['pop', 'hip-hop', 'electronic'],
+    suggestedVibes: ['party', 'anthemic', 'silly'],
+    suggestedMadLib: 'occasion-song',
+    suggestedMadLibFields: { occasion: 'birthday', adjective: 'banging' },
+  },
+  anniversary: {
+    moodSliders: { energy: 0.4, sentiment: 0.25, humor: 0.3 },
+    suggestedGenres: ['acoustic', 'r-and-b', 'jazz'],
+    suggestedVibes: ['romantic', 'heartfelt', 'nostalgic'],
+    suggestedMadLib: 'memory-song',
+    suggestedMadLibFields: {},
+  },
+  graduation: {
+    moodSliders: { energy: 0.8, sentiment: 0.7, humor: 0.5 },
+    suggestedGenres: ['pop', 'rock', 'indie'],
+    suggestedVibes: ['anthemic', 'epic', 'nostalgic'],
+    suggestedMadLib: 'anthem-song',
+    suggestedMadLibFields: {},
+  },
+  'baby-shower': {
+    moodSliders: { energy: 0.4, sentiment: 0.5, humor: 0.55 },
+    suggestedGenres: ['acoustic', 'folk', 'pop'],
+    suggestedVibes: ['heartfelt', 'chill', 'silly'],
+    suggestedMadLib: 'celebration-song',
+    suggestedMadLibFields: {},
+  },
+  wedding: {
+    moodSliders: { energy: 0.5, sentiment: 0.2, humor: 0.25 },
+    suggestedGenres: ['acoustic', 'r-and-b', 'pop'],
+    suggestedVibes: ['romantic', 'heartfelt', 'epic'],
+    suggestedMadLib: 'memory-song',
+    suggestedMadLibFields: {},
+  },
+  retirement: {
+    moodSliders: { energy: 0.55, sentiment: 0.6, humor: 0.7 },
+    suggestedGenres: ['country', 'folk', 'jazz'],
+    suggestedVibes: ['nostalgic', 'heartfelt', 'silly'],
+    suggestedMadLib: 'anthem-song',
+    suggestedMadLibFields: {},
+  },
+  promotion: {
+    moodSliders: { energy: 0.85, sentiment: 0.75, humor: 0.6 },
+    suggestedGenres: ['hip-hop', 'electronic', 'pop'],
+    suggestedVibes: ['anthemic', 'party', 'epic'],
+    suggestedMadLib: 'anthem-song',
+    suggestedMadLibFields: {},
+  },
+  'just-because': {
+    moodSliders: { energy: 0.5, sentiment: 0.5, humor: 0.5 },
+    suggestedGenres: [],
+    suggestedVibes: [],
+    suggestedMadLib: null,
+    suggestedMadLibFields: {},
+  },
+};

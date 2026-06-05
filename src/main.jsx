@@ -1,10 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
+import { ThemeProvider } from './components/visual/ThemeContext.jsx';
+import MotionProvider from './components/visual/MotionProvider.jsx';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('app')).render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider>
+      <MotionProvider>
+        <App />
+      </MotionProvider>
+    </ThemeProvider>
   </React.StrictMode>
 );

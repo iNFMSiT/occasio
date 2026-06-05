@@ -5,6 +5,15 @@
 
 import { ART_STYLES, THEMES, COMPOSITION_TYPES, MOOD_TYPES } from '../config/constants.js';
 import { MVP_CONFIG } from '../config/mvp.config.js';
+import { OCCASIONS } from '../features/survey/configs/occasionPresets.config.js';
+
+// Resolve an occasion value (preset id string or { label } object) to a display label.
+function occasionLabel(occasion) {
+  if (!occasion) return null;
+  if (typeof occasion === 'object') return occasion.label || null;
+  const match = OCCASIONS.find((o) => o.id === occasion);
+  return match ? match.label : occasion;
+}
 
 // Style rendering instructions — concise but descriptive narrative fragments
 const STYLE_INSTRUCTIONS = {
@@ -106,6 +115,22 @@ class PromptEngine {
       sections.push(props);
     }
 
+    // --- Occasion (sets the celebratory tone) ---
+    const occasion = occasionLabel(surveyData?.occasion);
+    if (occasion) {
+      sections.push('');
+      sections.push('## Occasion');
+      sections.push(`This image is a gift for a ${occasion} — give the scene a fitting, celebratory mood.`);
+    }
+
+    // --- Special Request (user's free-text vision) ---
+    const freeText = surveyData?.freeText?.trim();
+    if (freeText) {
+      sections.push('');
+      sections.push('## Special Request');
+      sections.push(`The user specifically asked for: ${freeText}. Prioritize honoring this in the scene.`);
+    }
+
     // --- Art Style ---
     sections.push('');
     sections.push('## Style');
@@ -204,6 +229,20 @@ class PromptEngine {
     sections.push(madLib.displayText);
     const props = this._buildEnvironmentProps(surveyData, null);
     if (props) sections.push(props);
+
+    const occasion = occasionLabel(surveyData?.occasion);
+    if (occasion) {
+      sections.push('');
+      sections.push('## Occasion');
+      sections.push(`This image is a gift for a ${occasion} — give the scene a fitting, celebratory mood.`);
+    }
+
+    const freeText = surveyData?.freeText?.trim();
+    if (freeText) {
+      sections.push('');
+      sections.push('## Special Request');
+      sections.push(`The user specifically asked for: ${freeText}. Prioritize honoring this in the scene.`);
+    }
 
     sections.push('');
     sections.push('## Style');
