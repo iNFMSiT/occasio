@@ -317,7 +317,7 @@ export default function ImageGenerateStep() {
           )}
           {phase === 'done' && (
             <button onClick={() => dispatch({ type: 'NEXT_STEP' })} className="flex items-center gap-2 px-6 py-2.5 bg-brand hover:bg-brand-dark rounded-lg font-medium text-sm transition-colors">
-              View Gallery <ArrowRight size={16} />
+              Add your message <ArrowRight size={16} />
             </button>
           )}
         </div>

@@ -2,6 +2,31 @@
 import { GoogleGenAI } from '@google/genai';
 import { GEMINI_CONFIG, isApiConfigured } from '../config/gemini.config.js';
 
+// Robustly parse the model's reply into up to 3 clean message strings.
+// Handles a JSON array, fenced code blocks, or plain numbered/bulleted lines.
+export function parseMessageOptions(text) {
+  if (!text) return [];
+  let s = text.trim().replace(/^```(?:json)?/i, '').replace(/```$/, '').trim();
+
+  const jsonStart = s.indexOf('[');
+  if (jsonStart !== -1) {
+    try {
+      const arr = JSON.parse(s.slice(jsonStart, s.lastIndexOf(']') + 1));
+      if (Array.isArray(arr)) {
+        return arr.map((x) => String(x).trim()).filter(Boolean).slice(0, 3);
+      }
+    } catch {
+      /* fall through to line parsing */
+    }
+  }
+
+  return s
+    .split('\n')
+    .map((l) => l.replace(/^\s*(?:\d+[.)]|[-*•])\s*/, '').replace(/^["'“”]+|["'“”]+$/g, '').trim())
+    .filter(Boolean)
+    .slice(0, 3);
+}
+
 class GeminiService {
   constructor() {
     this.client = null;
@@ -59,6 +84,24 @@ class GeminiService {
 
     if (!text) throw new Error('Could not analyze the image. Please try a different photo.');
     return text.trim();
+  }
+
+  // Generate short greeting-card message options from a text prompt.
+  // Returns an array of strings (the prompt instructs a JSON array of 3).
+  async generateMessages(prompt) {
+    if (!this.client) throw new Error('Gemini API not configured. Check your API key.');
+
+    const response = await this.client.models.generateContent({
+      model: GEMINI_CONFIG.visionModel, // gemini-2.5-flash (text)
+      contents: [{ role: 'user', parts: [{ text: prompt }] }],
+    });
+
+    const text = (response.candidates?.[0]?.content?.parts
+      ?.filter((p) => p.text)
+      .map((p) => p.text)
+      .join('') || '').trim();
+
+    return parseMessageOptions(text);
   }
 
   // Generate a single card image from a prompt

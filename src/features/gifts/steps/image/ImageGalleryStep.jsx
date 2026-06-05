@@ -6,6 +6,7 @@ import {
 import { useGiftFlow } from '../../GiftFlowContext.jsx';
 import { fireConfetti } from '../../../../components/visual/confetti.js';
 import CardExportModal from './CardExportModal.jsx';
+import CardFront from '../../components/CardFront.jsx';
 import { useToast } from '../../../../context/ToastContext.jsx';
 import geminiService from '../../../../services/geminiService.js';
 import { mockService } from '../../../../services/mockService.js';
@@ -209,7 +210,7 @@ export default function ImageGalleryStep() {
           <div key={i} className="space-y-1.5">
             <div className={`relative group rounded-xl overflow-hidden border-2 transition-all card-hover ${selected.has(i) ? 'border-brand shadow-lg shadow-brand/20' : 'border-surface-lighter'}`}>
               {card.imageUrl ? (
-                <img src={card.imageUrl} alt={`Card ${i + 1}`} className="w-full aspect-[2/3] object-cover" />
+                <CardFront card={card} className="w-full aspect-[2/3] object-cover" />
               ) : (
                 <div className="w-full aspect-[2/3] bg-surface-light flex items-center justify-center">
                   <Image size={32} className="text-text-muted" />

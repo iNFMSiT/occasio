@@ -8,7 +8,9 @@ import {
   renderPreview,
   downloadCardPdf,
   defaultMessageForOccasion,
+  ensureFontsLoaded,
 } from '../../../../services/cardExport.js';
+import { getTextStyle } from '../../../../config/textStyles.js';
 
 function occasionLabel(occasion) {
   if (!occasion) return null;
@@ -41,16 +43,23 @@ export default function CardExportModal({ card, occasion, onClose }) {
     return () => { alive = false; };
   }, [card.imageUrl]);
 
-  // Re-render the preview on any change.
+  // Re-render the preview on any change (after the overlay font is ready).
   useEffect(() => {
+    let alive = true;
     if (!img || !canvasRef.current) return;
-    renderPreview(canvasRef.current, { img, format, paperSize, message, showGuides, side });
-  }, [img, format, paperSize, message, showGuides, side]);
+    (async () => {
+      if (card.frontText?.text) await ensureFontsLoaded([getTextStyle(card.frontText.styleId).family]);
+      if (alive && canvasRef.current) {
+        renderPreview(canvasRef.current, { img, format, paperSize, message, frontText: card.frontText, showGuides, side });
+      }
+    })();
+    return () => { alive = false; };
+  }, [img, format, paperSize, message, showGuides, side, card.frontText]);
 
   const handleDownload = async () => {
     setBusy(true);
     try {
-      await downloadCardPdf({ card, message, format, paperSize, showGuides });
+      await downloadCardPdf({ card, message, frontText: card.frontText, format, paperSize, showGuides });
       addToast('Print-ready PDF downloaded!', 'success');
     } catch (e) {
       addToast('Could not build the PDF. Please try again.', 'error');

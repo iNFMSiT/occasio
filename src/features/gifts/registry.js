@@ -1,6 +1,6 @@
 import {
   Upload, ClipboardList, Sparkles, LayoutGrid,
-  Music, Headphones,
+  Music, Headphones, Type,
 } from 'lucide-react';
 import { COPY } from '../../config/messaging.js';
 
@@ -8,6 +8,7 @@ import { COPY } from '../../config/messaging.js';
 import ImageUploadStep from './steps/image/ImageUploadStep.jsx';
 import ImageSurveyStep from './steps/image/ImageSurveyStep.jsx';
 import ImageGenerateStep from './steps/image/ImageGenerateStep.jsx';
+import MessageStep from './steps/image/MessageStep.jsx';
 import ImageGalleryStep from './steps/image/ImageGalleryStep.jsx';
 
 // Song flow steps
@@ -22,17 +23,19 @@ export const GIFT_TYPES = {
     description: COPY.giftTypes.image.description,
     icon: Sparkles,
     color: 'from-purple-500 to-pink-500',
-    steps: ['upload', 'survey', 'generate', 'gallery'],
+    steps: ['upload', 'survey', 'generate', 'message', 'gallery'],
     stepComponents: {
       upload: ImageUploadStep,
       survey: ImageSurveyStep,
       generate: ImageGenerateStep,
+      message: MessageStep,
       gallery: ImageGalleryStep,
     },
     stepMeta: {
       upload: { label: 'Upload', icon: Upload },
       survey: { label: 'Customize', icon: ClipboardList },
       generate: { label: 'Generate', icon: Sparkles },
+      message: { label: 'Message', icon: Type },
       gallery: { label: 'Gallery', icon: LayoutGrid },
     },
     initialState: {
@@ -47,6 +50,7 @@ export const GIFT_TYPES = {
     initialSurveyData: {
       occasion: null,
       freeText: '',
+      recipient: { name: '', relationship: '' },
       moodSliders: { chaos: 0.5, energy: 0.5, humor: 0.5 },
       hobbies: [],
       favoriteShows: [],
