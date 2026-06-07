@@ -143,11 +143,10 @@ class GeminiService {
       contents,
       config: {
         responseModalities: ['TEXT', 'IMAGE'],
-        // TODO: tighten — SDK types use `imageConfig` with `aspectRatio`; `numberOfImages`
-        // has no SDK equivalent and was a no-op in JS. Keeping aspectRatio only.
-        imageConfig: {
-          aspectRatio: options.aspectRatio ?? GEMINI_CONFIG.imageConfig.aspectRatio,
-        },
+        // NOTE: the original JS passed `imageGenerationConfig: { aspectRatio, numberOfImages }`,
+        // but that field name is not recognized by @google/genai and was silently dropped at
+        // runtime — so no aspect ratio was ever sent. Preserving that behavior here.
+        // To actually enforce GEMINI_CONFIG.imageConfig.aspectRatio (2:3), pass `imageConfig: { aspectRatio }` — tracked as a separate intentional change.
       },
     });
 
