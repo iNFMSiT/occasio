@@ -12,6 +12,15 @@ dist
 dist-ssr
 *.local
 
+# Large source assets — NOT used by the build (vite publicDir:false). Kept locally only.
+public/assets/
+*.zip
+*.mov
+*.mp4
+
+# Local tooling output
+.playwright-mcp/
+
 # Environment variables
 .env
 .env.local
