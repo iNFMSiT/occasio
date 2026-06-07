@@ -1,5 +1,7 @@
 // Mock data service for development without API calls
 
+import type { BlueprintItem, GenerateBatchOptions, GeneratedCard, GenerateImageOptions } from './ai/types';
+
 const MOCK_ANCHOR = `Young adult, appears mid-20s, male presentation. Medium-length brown hair, slightly wavy, swept to the side. Oval face shape with defined jawline. Brown eyes, medium build. Clean-shaven with a warm, friendly expression. No glasses. Wearing a casual t-shirt.`;
 
 const MOCK_STYLES = [
@@ -13,11 +15,12 @@ const MOCK_STYLES = [
   { gradient: ['#e0c3fc', '#8ec5fc'], label: 'Sky' },
 ];
 
-function generateMockImage(index, style, theme) {
+function generateMockImage(index: number, style: string | undefined, theme: string | undefined): string {
   const canvas = document.createElement('canvas');
   canvas.width = 600;
   canvas.height = 900;
-  const ctx = canvas.getContext('2d');
+  // Non-null assertion: '2d' context is always available on a newly-created canvas element.
+  const ctx = canvas.getContext('2d')!;
 
   // Background gradient
   const mockStyle = MOCK_STYLES[index % MOCK_STYLES.length];
@@ -67,14 +70,14 @@ function generateMockImage(index, style, theme) {
 }
 
 export const mockService = {
-  async analyzeImage(_file) {
+  async analyzeImage(_file: File): Promise<string> {
     await new Promise((r) => setTimeout(r, 1200));
     return MOCK_ANCHOR;
   },
 
-  async generateImage(prompt, options = {}) {
+  async generateImage(prompt: string, options: GenerateImageOptions = {}): Promise<GeneratedCard> {
     await new Promise((r) => setTimeout(r, 800 + Math.random() * 1000));
-    const index = options.cardIndex || 0;
+    const index = options.cardIndex ?? 0;
     return {
       imageUrl: generateMockImage(index, options.style, options.theme),
       prompt,
@@ -83,8 +86,8 @@ export const mockService = {
     };
   },
 
-  async generateBatch(blueprintItems, options = {}) {
-    const results = [];
+  async generateBatch(blueprintItems: BlueprintItem[], options: GenerateBatchOptions = {}): Promise<GeneratedCard[]> {
+    const results: GeneratedCard[] = [];
     for (let i = 0; i < blueprintItems.length; i++) {
       const item = blueprintItems[i];
       await new Promise((r) => setTimeout(r, 600 + Math.random() * 800));

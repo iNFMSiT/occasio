@@ -1,5 +1,5 @@
 import geminiService from '../geminiService.js';
-import { mockService } from '../mockService.js';
+import { mockService } from '../mockService';
 import type { ImageProvider } from './types';
 
 export const geminiImageProvider: ImageProvider = {
