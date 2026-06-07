@@ -1,8 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import { ArrowLeft, Sparkles, Wand2 } from 'lucide-react';
 import { m } from 'motion/react';
-import { HALL_OF_FAME, SHOWCASE } from '../../config/inspirationRecipes.js';
-import { COPY } from '../../config/messaging.js';
+import { HALL_OF_FAME, SHOWCASE } from '../../data/inspiration';
+import { COPY } from '../../data/copy';
 
 const ALL = 'All';
 

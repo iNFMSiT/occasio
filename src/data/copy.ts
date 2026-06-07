@@ -41,17 +41,20 @@ export const HERO_VARIANTS = {
 export const DEFAULT_VARIANT = 'sings';
 const STORAGE_KEY = 'occ:variant';
 
+type HeroVariantKey = keyof typeof HERO_VARIANTS;
+
 /** Resolve the active hero variant: ?v=<id> → localStorage → default. */
 export function getHeroVariant() {
   if (typeof window !== 'undefined') {
     try {
       const param = new URLSearchParams(window.location.search).get('v');
-      if (param && HERO_VARIANTS[param]) {
+      if (param && (HERO_VARIANTS as Record<string, typeof HERO_VARIANTS[HeroVariantKey]>)[param]) {
         window.localStorage?.setItem(STORAGE_KEY, param);
-        return HERO_VARIANTS[param];
+        return (HERO_VARIANTS as Record<string, typeof HERO_VARIANTS[HeroVariantKey]>)[param];
       }
       const stored = window.localStorage?.getItem(STORAGE_KEY);
-      if (stored && HERO_VARIANTS[stored]) return HERO_VARIANTS[stored];
+      if (stored && (HERO_VARIANTS as Record<string, typeof HERO_VARIANTS[HeroVariantKey]>)[stored])
+        return (HERO_VARIANTS as Record<string, typeof HERO_VARIANTS[HeroVariantKey]>)[stored];
     } catch {
       /* ignore (private mode / SSR) */
     }

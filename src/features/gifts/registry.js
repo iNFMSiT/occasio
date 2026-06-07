@@ -2,7 +2,7 @@ import {
   Upload, ClipboardList, Sparkles, LayoutGrid,
   Music, Headphones, Type,
 } from 'lucide-react';
-import { COPY } from '../../config/messaging.js';
+import { COPY } from '../../data/copy';
 
 // Image flow steps
 import ImageUploadStep from './steps/image/ImageUploadStep.jsx';

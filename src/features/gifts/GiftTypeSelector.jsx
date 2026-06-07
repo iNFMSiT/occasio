@@ -4,7 +4,7 @@ import { m } from 'motion/react';
 import { GIFT_TYPES } from './registry.js';
 import TiltCard from '../../components/visual/TiltCard.jsx';
 import { OccasioHero } from './hero/OccasioHero.jsx';
-import { getHeroVariant, COPY } from '../../config/messaging.js';
+import { getHeroVariant, COPY } from '../../data/copy';
 
 const container = {
   hidden: {},
