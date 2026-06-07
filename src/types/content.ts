@@ -18,10 +18,12 @@ export interface Theme {
   buildScene: (survey: SurveyData) => string;
 }
 
+export interface SelectOption { value: string; label: string; }
+
 export interface MadLibField {
   id: string;
   label: string;
-  options: { value: string; label: string }[];
+  options: SelectOption[];
 }
 
 export interface MadLibTemplate {

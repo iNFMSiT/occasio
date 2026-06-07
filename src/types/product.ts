@@ -1,6 +1,7 @@
 import type { SurveyData } from './survey';
 
 export type ProductMedium = 'image' | 'song';
+// Physical/SKU format a product can become. Declared now; attached to Product/GenerationOutput when fulfilment is modeled.
 export type ProductFormat = 'digital' | 'postcard' | 'card-deck' | 'mug';
 
 export interface ProductType {

@@ -14,8 +14,7 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "allowImportingTsExtensions": false,
-    "types": ["vite/client", "node"]
+"types": ["vite/client", "node"]
   },
   "include": ["src"]
 }
