@@ -3,7 +3,7 @@ import { Flame, Zap, Laugh } from 'lucide-react';
 import { Heart, Tv, Music } from 'lucide-react';
 import { ART_STYLES } from '../../../data/artStyles';
 import { THEMES } from '../../../data/themes';
-import { MAD_LIBS_TEMPLATES } from '../../../config/constants.js';
+import { MAD_LIBS_TEMPLATES } from '../../../data/madlibs';
 import { MVP_CONFIG } from '../../../config/mvp.config.js';
 
 export const IMAGE_SLIDERS = [
