@@ -3,7 +3,8 @@
 // Research-backed: narrative > keyword lists, ## headers > ASCII delimiters,
 // concise descriptions > verbose constraint dumps.
 
-import { ART_STYLES, THEMES, COMPOSITION_TYPES, MOOD_TYPES } from '../config/constants.js';
+import { ART_STYLES, STYLE_INSTRUCTIONS } from '../data/artStyles';
+import { COMPOSITION_TYPES, MOOD_TYPES } from '../config/constants.js';
 import { MVP_CONFIG } from '../config/mvp.config.js';
 import { OCCASIONS } from '../features/survey/configs/occasionPresets.config.js';
 
@@ -14,20 +15,6 @@ function occasionLabel(occasion) {
   const match = OCCASIONS.find((o) => o.id === occasion);
   return match ? match.label : occasion;
 }
-
-// Style rendering instructions — concise but descriptive narrative fragments
-const STYLE_INSTRUCTIONS = {
-  'hand-animated': 'classic 2D hand-animated style with visible brushstrokes, cel-shading outlines, and soft painted backgrounds reminiscent of Studio Ghibli. Organic, slightly imperfect linework.',
-  'pixar': 'Pixar 3D CGI with smooth subsurface scattering on skin, large expressive eyes, slightly exaggerated proportions, and cinematic volumetric lighting.',
-  'hyper-realistic': 'photorealistic, shot on a Canon EOS R5 with 85mm f/1.4 lens. Natural skin texture with pores, realistic soft lighting, shallow depth of field, lifelike eyes with catchlights.',
-  'watercolor': 'delicate watercolor on cold-pressed paper. Soft wet-on-wet gradients, visible paint blooms, translucent layers, white paper showing through highlights.',
-  'oil-painting': 'classical oil painting with rich impasto brushwork, chiaroscuro lighting inspired by Rembrandt, deep saturated colors, and visible canvas texture.',
-  'digital-art': 'modern digital illustration trending on ArtStation. Clean shapes with painterly rendering, vibrant saturated colors, and strong graphic composition.',
-  'sketch': 'hand-drawn pencil and charcoal sketch on ivory paper. Visible hatching, smudged shadows, confident linework, with partial unfinished edges.',
-  'anime': 'Japanese anime style with sharp clean lineart, large detailed eyes with highlight reflections, dynamic hair strands, and flat color shading with precise shadow cutoffs.',
-  'comic-book': 'bold comic book art with thick ink outlines, Ben-Day dot halftone shading, flat primary colors, and dramatic foreshortening.',
-  'vintage-poster': 'retro 1950s-60s poster design with a limited bold color palette, screen-print halftone texture, and Art Deco typography influence.',
-};
 
 // Expanded theme context — weaves in survey data naturally
 const THEME_BUILDERS = {

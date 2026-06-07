@@ -1,17 +1,3 @@
-// Art Styles Configuration
-export const ART_STYLES = [
-  { id: 'hand-animated', label: 'Hand Animated', description: 'Classic 2D animation style' },
-  { id: 'pixar', label: 'Pixar 3D', description: '3D animated movie style' },
-  { id: 'hyper-realistic', label: 'Hyper Realistic', description: 'Photorealistic rendering' },
-  { id: 'watercolor', label: 'Watercolor', description: 'Soft, painted watercolor style' },
-  { id: 'oil-painting', label: 'Oil Painting', description: 'Classic oil painting aesthetic' },
-  { id: 'digital-art', label: 'Digital Art', description: 'Modern digital illustration' },
-  { id: 'sketch', label: 'Hand-Drawn Sketch', description: 'Pencil/charcoal sketch style' },
-  { id: 'anime', label: 'Anime', description: 'Japanese animation style' },
-  { id: 'comic-book', label: 'Comic Book', description: 'Classic comic book art' },
-  { id: 'vintage-poster', label: 'Vintage Poster', description: 'Retro poster design' },
-];
-
 // Theme Categories
 export const THEMES = [
   { id: 'celebrities', label: 'Celebrities', description: 'Transform into famous personalities' },

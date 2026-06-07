@@ -1,7 +1,8 @@
 import { SlidersHorizontal, BookOpen, User, Palette, Sparkles, PenLine } from 'lucide-react';
 import { Flame, Zap, Laugh } from 'lucide-react';
 import { Heart, Tv, Music } from 'lucide-react';
-import { ART_STYLES, THEMES, MAD_LIBS_TEMPLATES } from '../../../config/constants.js';
+import { ART_STYLES } from '../../../data/artStyles';
+import { THEMES, MAD_LIBS_TEMPLATES } from '../../../config/constants.js';
 import { MVP_CONFIG } from '../../../config/mvp.config.js';
 
 export const IMAGE_SLIDERS = [
