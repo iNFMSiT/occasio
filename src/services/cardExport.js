@@ -9,7 +9,7 @@
 //     Top two quadrants are drawn upside-down so they read correctly once folded.
 //   • halfFold5x7 — a 10×7 spread, two pages (outside/inside) for duplex / print shop.
 
-import { CARD_EXPORT } from '../config/constants.js';
+import { CARD_EXPORT } from '../data/print';
 import { getTextStyle } from '../config/textStyles.js';
 
 const { panelMargin } = CARD_EXPORT;
