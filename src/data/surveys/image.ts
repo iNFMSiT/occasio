@@ -1,10 +1,10 @@
 import { SlidersHorizontal, BookOpen, User, Palette, Sparkles, PenLine } from 'lucide-react';
 import { Flame, Zap, Laugh } from 'lucide-react';
 import { Heart, Tv, Music } from 'lucide-react';
-import { ART_STYLES } from '../../../data/artStyles';
-import { THEMES } from '../../../data/themes';
-import { MAD_LIBS_TEMPLATES } from '../../../data/madlibs';
-import { MVP_CONFIG } from '../../../config/mvp.config.js';
+import { ART_STYLES } from '../artStyles';
+import { THEMES } from '../themes';
+import { MAD_LIBS_TEMPLATES } from '../madlibs';
+import { MVP_CONFIG } from '../../config/mvp.config.js';
 
 export const IMAGE_SLIDERS = [
   {
@@ -88,7 +88,7 @@ export const IMAGE_SURVEY_SECTIONS = [
     dataKey: 'freeText',
     config: {
       placeholder: 'e.g. riding a giant rubber duck through a neon city, holding their dog',
-      helper: 'Anything specific you want to see? We’ll work it in.',
+      helper: "Anything specific you want to see? We'll work it in.",
     },
   },
 

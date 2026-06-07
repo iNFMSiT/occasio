@@ -186,7 +186,7 @@ export const LYRIC_MAD_LIBS = [
         options: [
           { value: 'the most amazing person ever', label: 'Amazing Person' },
           { value: 'literally one of a kind', label: 'One of a Kind' },
-          { value: 'everyone\'s favorite human', label: "Everyone's Favorite" },
+          { value: "everyone's favorite human", label: "Everyone's Favorite" },
           { value: 'the life of every party', label: 'Life of the Party' },
           { value: 'the glue that holds us together', label: 'The Glue' },
           { value: 'an absolute legend', label: 'An Absolute Legend' },
@@ -205,7 +205,7 @@ export const LYRIC_MAD_LIBS = [
           { value: 'the birthday king', label: 'The Birthday King' },
           { value: 'the birthday queen', label: 'The Birthday Queen' },
           { value: 'the greatest friend', label: 'Greatest Friend' },
-          { value: 'the world\'s best parent', label: "World's Best Parent" },
+          { value: "the world's best parent", label: "World's Best Parent" },
           { value: 'the office legend', label: 'The Office Legend' },
           { value: 'the group chat hero', label: 'Group Chat Hero' },
         ],
@@ -289,14 +289,14 @@ export const SONG_SURVEY_SECTIONS = [
   {
     id: 'vision',
     label: "What's this song about?",
-    subtitle: 'Memories, inside jokes, who it’s for — in your own words. Optional.',
+    subtitle: "Memories, inside jokes, who it's for — in your own words. Optional.",
     icon: PenLine,
     component: 'vision',
     placement: 'core',
     dataKey: 'freeText',
     config: {
-      placeholder: 'e.g. for my mom’s 50th — she loves gardening and always says “easy peasy”',
-      helper: 'Tell us what makes them special and we’ll weave it into the lyrics.',
+      placeholder: "e.g. for my mom's 50th — she loves gardening and always says \"easy peasy\"",
+      helper: "Tell us what makes them special and we'll weave it into the lyrics.",
     },
   },
 

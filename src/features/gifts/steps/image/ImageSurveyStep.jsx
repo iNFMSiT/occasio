@@ -1,7 +1,7 @@
 import React from 'react';
 import SurveyStep from '../shared/SurveyStep.jsx';
 import OccasionCombobox from '../../../survey/components/OccasionCombobox.jsx';
-import { IMAGE_SURVEY_SECTIONS } from '../../../survey/configs/imageSurvey.config.js';
+import { IMAGE_SURVEY_SECTIONS } from '../../../../data/surveys/image';
 import { useGiftFlow } from '../../GiftFlowContext.jsx';
 
 export default function ImageSurveyStep() {
