@@ -1,6 +1,42 @@
 // Mock Suno service for development without API access
 // Generates placeholder audio and lyrics
 
+// Local types — mirrors SongPrompt/SongOptions in ai/song.ts (no circular import).
+interface SongPromptLocal {
+  fullPrompt?: string;
+  genres?: string[];
+  vibes?: string[];
+  tempo?: string;
+  index?: number;
+  label?: string;
+}
+
+interface SongProgressCallback {
+  current: number;
+  total: number;
+  phase: string;
+}
+
+interface SurveyDataLocal {
+  memories?: string[];
+  lyricMadLibs?: Array<{ selections?: { person?: string } }>;
+  [key: string]: unknown;
+}
+
+interface SongOptionsLocal {
+  onProgress?: (progress: SongProgressCallback) => void;
+  surveyData?: SurveyDataLocal;
+}
+
+interface SongResult {
+  audioUrl: string;
+  lyrics: string;
+  title: string;
+  duration: number;
+  genre: string;
+  prompt: string;
+}
+
 const MOCK_LYRICS_TEMPLATES = [
   {
     verses: [
@@ -28,7 +64,7 @@ const MOCK_LYRICS_TEMPLATES = [
   },
 ];
 
-function generateMockLyrics(surveyData) {
+function generateMockLyrics(surveyData: SurveyDataLocal | undefined): string {
   const template = MOCK_LYRICS_TEMPLATES[Math.floor(Math.random() * MOCK_LYRICS_TEMPLATES.length)];
 
   // Personalize with survey data if available
@@ -40,14 +76,14 @@ function generateMockLyrics(surveyData) {
   lyrics += `[Chorus]\n${template.chorus}`;
 
   // Add personalization notes
-  if (surveyData?.memories?.length > 0) {
+  if (surveyData?.memories && surveyData.memories.length > 0) {
     lyrics += `\n\n[Outro]\nRemembering ${surveyData.memories[0]}...`;
   }
 
   return lyrics;
 }
 
-function generateMockAudioUrl() {
+function generateMockAudioUrl(): string {
   // Generate a simple oscillator-based audio blob as placeholder
   const sampleRate = 44100;
   const duration = 15; // 15 seconds of mock audio
@@ -57,7 +93,7 @@ function generateMockAudioUrl() {
   const view = new DataView(buffer);
 
   // WAV header
-  const writeString = (offset, string) => {
+  const writeString = (offset: number, string: string): void => {
     for (let i = 0; i < string.length; i++) {
       view.setUint8(offset + i, string.charCodeAt(i));
     }
@@ -93,7 +129,7 @@ function generateMockAudioUrl() {
 }
 
 export const mockSunoService = {
-  async generateSong(prompt, options = {}) {
+  async generateSong(prompt: SongPromptLocal, options: SongOptionsLocal = {}): Promise<SongResult> {
     const { onProgress, surveyData } = options;
 
     // Simulate generation time
@@ -108,16 +144,16 @@ export const mockSunoService = {
     return {
       audioUrl: generateMockAudioUrl(),
       lyrics: generateMockLyrics(surveyData),
-      title: `Song for ${surveyData?.lyricMadLibs?.[0]?.selections?.person || 'You'}`,
+      title: `Song for ${surveyData?.lyricMadLibs?.[0]?.selections?.person ?? 'You'}`,
       duration: 15,
-      genre: prompt.genres?.join(', ') || 'Pop',
-      prompt: prompt.fullPrompt || 'Mock generated song',
+      genre: prompt.genres?.join(', ') ?? 'Pop',
+      prompt: prompt.fullPrompt ?? 'Mock generated song',
     };
   },
 
-  async generateSongBatch(prompts, options = {}) {
+  async generateSongBatch(prompts: SongPromptLocal[], options: SongOptionsLocal = {}): Promise<SongResult[]> {
     const { onProgress } = options;
-    const results = [];
+    const results: SongResult[] = [];
 
     for (let i = 0; i < prompts.length; i++) {
       const result = await this.generateSong(prompts[i], {

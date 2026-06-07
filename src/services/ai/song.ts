@@ -1,6 +1,6 @@
 // Song service abstraction — swap mock for real Suno when API access is available
 
-import { mockSunoService } from '../mockSunoService.js';
+import { mockSunoService } from '../mockSunoService';
 
 // Set to true when real Suno API is available
 const USE_REAL_SUNO = false;
