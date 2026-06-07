@@ -10,9 +10,9 @@ import styles from './OccasioHero.module.css';
  *  + gradient wordmark + CTA, with a "develops" reveal moment. */
 export function OccasioHero({
   photos = DEFAULT_PHOTOS,
-  kicker = 'ANY OCCASION · PRINT AT HOME TONIGHT',
-  tagline = 'Greeting cards that actually sing.',
-  ctaLabel = 'Make their card',
+  kicker = 'ANY OCCASION · ONE DESIGN, MANY WAYS',
+  tagline = 'Custom designs that actually sing.',
+  ctaLabel = 'Make yours',
   intensity = 1,
   onGenerate,
   demoReveal = true,

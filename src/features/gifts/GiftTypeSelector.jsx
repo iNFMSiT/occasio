@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { ArrowRight, Sparkles, Wand2, Download, Printer } from 'lucide-react';
+import { ArrowRight, Sparkles, Wand2, Share2, Clock } from 'lucide-react';
 import { m } from 'motion/react';
 import { GIFT_TYPES } from './registry.js';
 import TiltCard from '../../components/visual/TiltCard.jsx';
@@ -15,7 +15,7 @@ const rise = {
   show: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 120, damping: 18 } },
 };
 
-const HOW_ICONS = [Wand2, Download, Printer];
+const HOW_ICONS = [Wand2, Sparkles, Share2];
 
 export default function GiftTypeSelector({ onSelect, onInspiration }) {
   const types = Object.values(GIFT_TYPES);
@@ -65,6 +65,22 @@ export default function GiftTypeSelector({ onSelect, onInspiration }) {
           );
         })}
       </m.div>
+
+      {/* Coming soon tease — honest about not-yet-built outputs */}
+      {COPY.comingSoon?.length > 0 && (
+        <m.div variants={rise} className="flex flex-wrap items-center justify-center gap-2">
+          <span className="text-xs font-medium uppercase tracking-wide text-text-muted/70">Coming soon</span>
+          {COPY.comingSoon.map((item) => (
+            <span
+              key={item}
+              className="inline-flex items-center gap-1.5 rounded-full border border-surface-lighter/60 bg-surface-light/20 px-3 py-1 text-xs text-text-muted"
+            >
+              <Clock size={12} className="text-accent" />
+              {item}
+            </span>
+          ))}
+        </m.div>
+      )}
 
       {/* Gift type cards */}
       <div ref={cardsRef} className="scroll-mt-6">

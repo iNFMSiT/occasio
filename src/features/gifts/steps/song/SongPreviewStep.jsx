@@ -1,11 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 import {
   Play, Pause, Download, RefreshCw, ArrowLeft, Upload,
-  Music, ChevronDown, ChevronUp,
+  Music, ChevronDown, ChevronUp, Share2,
 } from 'lucide-react';
 import { useGiftFlow } from '../../GiftFlowContext.jsx';
 import { fireConfetti } from '../../../../components/visual/confetti.js';
 import { useToast } from '../../../../context/ToastContext.jsx';
+import { shareSong } from '../../../../services/shareCard.js';
 import RatingSlider from '../../../../components/RatingSlider.jsx';
 import songService from '../../../../services/songService.js';
 import songPromptEngine from '../../../../services/songPromptEngine.js';
@@ -13,7 +14,23 @@ import songPromptEngine from '../../../../services/songPromptEngine.js';
 function SongCard({ song, index, onRate, onRegenerate, regenerating }) {
   const [playing, setPlaying] = useState(false);
   const [lyricsOpen, setLyricsOpen] = useState(false);
+  const [sharing, setSharing] = useState(false);
+  const { addToast } = useToast();
   const audioRef = useRef(null);
+
+  const handleShare = async () => {
+    if (!song.audioUrl || sharing) return;
+    setSharing(true);
+    try {
+      const result = await shareSong({ song });
+      if (result === 'shared') addToast('Shared!', 'success');
+      else if (result === 'downloaded') addToast('Saved — attach it to your message.', 'info');
+    } catch {
+      addToast('Could not share. Try downloading instead.', 'error');
+    } finally {
+      setSharing(false);
+    }
+  };
 
   const togglePlay = () => {
     if (!audioRef.current) return;
@@ -79,6 +96,13 @@ function SongCard({ song, index, onRate, onRegenerate, regenerating }) {
               className="flex items-center gap-1.5 px-3 py-1.5 text-xs border border-surface-lighter rounded-lg hover:bg-surface-light transition-colors"
             >
               <Download size={12} /> Download
+            </button>
+            <button
+              onClick={handleShare}
+              disabled={sharing}
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs border border-surface-lighter rounded-lg hover:bg-surface-light disabled:opacity-50 transition-colors"
+            >
+              <Share2 size={12} /> Share
             </button>
             <button
               onClick={() => onRegenerate(index)}

@@ -235,6 +235,16 @@ export function renderCardFront(canvas, { img, frontText, width = 600 }) {
   drawFrontText(ctx, W, H, H / 5.5, frontText);
 }
 
+// Render the finished design front (image + overlay) to a PNG Blob — the shareable
+// artifact. Loads the image and waits for the overlay font first.
+export async function cardFrontToBlob(card, width = 1200) {
+  const img = await loadImage(card.imageUrl);
+  if (card.frontText?.text) await ensureFontsLoaded([getTextStyle(card.frontText.styleId).family]);
+  const canvas = document.createElement('canvas');
+  renderCardFront(canvas, { img, frontText: card.frontText, width });
+  return new Promise((resolve) => canvas.toBlob((b) => resolve(b), 'image/png'));
+}
+
 function messagePanel(ctx, w, h, ppi, message) {
   const m = panelMargin * ppi * 1.4;
   drawWrappedText(ctx, message, m, m, w - 2 * m, h - 2 * m, {

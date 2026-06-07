@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { X, Download, Loader2, Printer } from 'lucide-react';
+import { X, Download, Loader2, Printer, Share2 } from 'lucide-react';
 import { useToast } from '../../../../context/ToastContext.jsx';
+import { shareDesign } from '../../../../services/shareCard.js';
 import { OCCASIONS } from '../../../survey/configs/occasionPresets.config.js';
 import { CARD_EXPORT } from '../../../../config/constants.js';
 import {
@@ -55,6 +56,19 @@ export default function CardExportModal({ card, occasion, onClose }) {
     })();
     return () => { alive = false; };
   }, [img, format, paperSize, message, showGuides, side, card.frontText]);
+
+  const handleShare = async () => {
+    setBusy(true);
+    try {
+      const result = await shareDesign({ card });
+      if (result === 'shared') addToast('Shared!', 'success');
+      else if (result === 'downloaded') addToast('Saved — attach it to your message.', 'info');
+    } catch {
+      addToast('Could not share. Try downloading instead.', 'error');
+    } finally {
+      setBusy(false);
+    }
+  };
 
   const handleDownload = async () => {
     setBusy(true);
@@ -179,14 +193,24 @@ export default function CardExportModal({ card, occasion, onClose }) {
               Show fold &amp; cut guides
             </label>
 
-            <button
-              onClick={handleDownload}
-              disabled={busy || !img}
-              className="flex w-full items-center justify-center gap-2 rounded-lg bg-brand px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brand-dark disabled:opacity-50"
-            >
-              {busy ? <Loader2 size={16} className="animate-spin" /> : <Download size={16} />}
-              {busy ? 'Building PDF…' : 'Download PDF'}
-            </button>
+            <div className="flex gap-2">
+              <button
+                onClick={handleShare}
+                disabled={busy || !img}
+                className="flex items-center justify-center gap-2 rounded-lg border border-surface-lighter bg-surface-light/40 px-4 py-2.5 text-sm font-semibold transition-colors hover:bg-surface-light disabled:opacity-50"
+                title="Share the design"
+              >
+                <Share2 size={16} /> Share
+              </button>
+              <button
+                onClick={handleDownload}
+                disabled={busy || !img}
+                className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-brand px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brand-dark disabled:opacity-50"
+              >
+                {busy ? <Loader2 size={16} className="animate-spin" /> : <Download size={16} />}
+                {busy ? 'Building…' : 'Download PDF'}
+              </button>
+            </div>
             <p className="text-center text-[11px] text-text-muted/80">
               Print at 100% / “actual size” for correct dimensions.
             </p>

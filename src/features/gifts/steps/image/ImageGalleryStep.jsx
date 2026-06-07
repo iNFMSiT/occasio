@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
   Download, RefreshCw, ShoppingBag, Check, Image, Upload,
-  ArrowLeft, Package, Coffee, Smartphone, Frame, Code, Printer,
+  ArrowLeft, Package, Coffee, Smartphone, Frame, Code, Printer, Share2,
 } from 'lucide-react';
 import { useGiftFlow } from '../../GiftFlowContext.jsx';
 import { fireConfetti } from '../../../../components/visual/confetti.js';
+import { shareDesign } from '../../../../services/shareCard.js';
 import CardExportModal from './CardExportModal.jsx';
 import CardFront from '../../components/CardFront.jsx';
 import { useToast } from '../../../../context/ToastContext.jsx';
@@ -139,6 +140,21 @@ export default function ImageGalleryStep() {
     link.click();
   };
 
+  const [sharing, setSharing] = useState(false);
+  const handleShare = async (card) => {
+    if (sharing) return;
+    setSharing(true);
+    try {
+      const result = await shareDesign({ card });
+      if (result === 'shared') addToast('Shared!', 'success');
+      else if (result === 'downloaded') addToast('Saved — attach it to your message.', 'info');
+    } catch {
+      addToast('Could not share. Try downloading instead.', 'error');
+    } finally {
+      setSharing(false);
+    }
+  };
+
   return (
     <div className="animate-fade-in space-y-6">
       <div className="text-center space-y-2">
@@ -229,6 +245,12 @@ export default function ImageGalleryStep() {
                   <button onClick={(e) => { e.stopPropagation(); setExportIndex(i); }}
                     className="p-2.5 bg-white/20 rounded-full hover:bg-white/30 backdrop-blur-sm transition-colors" title="Make printable card">
                     <Printer size={16} />
+                  </button>
+                )}
+                {card.imageUrl && (
+                  <button onClick={(e) => { e.stopPropagation(); handleShare(card); }} disabled={sharing}
+                    className="p-2.5 bg-white/20 rounded-full hover:bg-white/30 backdrop-blur-sm transition-colors disabled:opacity-50" title="Share">
+                    <Share2 size={16} />
                   </button>
                 )}
               </div>

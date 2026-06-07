@@ -1,39 +1,40 @@
 // Customer-facing marketing copy, in one place.
 //
-// Positioning: a playful, ANY-occasion, print-at-home greeting CARD (the hero)
-// with a companion custom SONG, leading with the instant / no-shipping angle.
+// Positioning: DESIGN-FIRST. The AI-generated design is the hero asset; the card,
+// song, and (soon) merch are ways to use it. Playful voice, any occasion. Today
+// you can share, print, or download; a hosted singing-card link + merch are soon.
 //
 // The hero copy ships as three A/B-testable variants. Pick the active one with a
-// `?v=<id>` URL param (e.g. ?v=printer) or persist via localStorage; otherwise the
-// DEFAULT_VARIANT is used. Swap DEFAULT_VARIANT to change the default for everyone.
+// `?v=<id>` URL param (e.g. ?v=reimagined) or persist via localStorage; otherwise
+// the DEFAULT_VARIANT is used. Swap DEFAULT_VARIANT to change the default.
 
 export const HERO_VARIANTS = {
-  // DEFAULT — leads with our unique differentiator (the card comes with a song).
+  // DEFAULT — design-first, keeps the loved "it sings" differentiator.
   sings: {
     id: 'sings',
-    kicker: 'ANY OCCASION · PRINT AT HOME TONIGHT',
-    headline: 'Greeting cards that actually sing.',
+    kicker: 'ANY OCCASION · ONE DESIGN, MANY WAYS',
+    headline: 'Custom designs that actually sing.',
     subhead:
-      'Make a one-of-a-kind card for any occasion, get a custom song to match, and print it at home tonight — no store, no shipping, no “I forgot.”',
-    cta: 'Make their card',
+      'Turn your photos into a one-of-a-kind design for any occasion — with a song to match. Share, print, or download it today; a singing-card link and merch are coming soon.',
+    cta: 'Make yours',
   },
-  // Relatable last-minute hook (high-intent procrastinators).
-  forgot: {
-    id: 'forgot',
-    kicker: 'READY TONIGHT · NO SHIPPING',
-    headline: 'Forgot a card again? Make a way better one.',
+  // Brand-forward, design-as-hero.
+  reimagined: {
+    id: 'reimagined',
+    kicker: 'PHOTOS IN · MASTERPIECE OUT',
+    headline: 'Anyone, reimagined.',
     subhead:
-      'A custom card for any occasion — with a song to match — designed and printed at home in minutes.',
-    cta: 'Save the day',
+      'Turn a photo into a custom design with a matching song, then share, print, or download it — merch on the way.',
+    cta: 'Make a design',
   },
-  // Print-at-home flex.
-  printer: {
-    id: 'printer',
-    kicker: 'ANY OCCASION · NO STORE, NO SHIPPING',
-    headline: "The best gift they'll get — straight from your printer.",
+  // Versatility / merch tease.
+  anything: {
+    id: 'anything',
+    kicker: 'YOUR DESIGN · ON ANYTHING',
+    headline: 'Make it once. Use it everywhere.',
     subhead:
-      'Make a custom card for any occasion, add a song to match, then download, print, and fold at home.',
-    cta: 'Start a card',
+      'One custom design — share it as a singing card, print it, and soon put it on a mug, tee, or keychain. Any occasion, from your photos.',
+    cta: 'Start designing',
   },
 };
 
@@ -60,33 +61,39 @@ export function getHeroVariant() {
 
 // Shared, static copy used across the marketing surfaces.
 export const COPY = {
-  shortTagline: 'Custom cards + songs, printed at home.',
+  shortTagline: 'Custom designs + songs, for any occasion.',
 
-  selectorHeading: 'Start with a card',
+  selectorHeading: 'Start with a design',
   selectorInspirationCta: 'New here?',
-  selectorInspirationLink: 'See cards people made',
+  selectorInspirationLink: 'See designs people made',
 
   // The three-step "how it works" strip on the landing.
   howItWorks: [
-    { title: 'Make it', detail: 'Pick a style, add your photos & details.' },
-    { title: 'Download', detail: 'Get a print-ready card in seconds.' },
-    { title: 'Print & fold', detail: 'Standard card size — print at home.' },
+    { title: 'Create', detail: 'Turn your photos into a custom design.' },
+    { title: 'Personalize', detail: 'Add a song and a message.' },
+    { title: 'Use it', detail: 'Share, print, or download — merch coming soon.' },
   ],
 
   giftTypes: {
     image: {
-      label: 'Printable Greeting Card',
-      description: 'A one-of-a-kind card for any occasion — print & fold at home.',
+      label: 'Custom Design',
+      description: 'A one-of-a-kind design from your photos — for cards, prints, and (soon) merch.',
     },
     song: {
       label: 'A Song to Match',
-      description: 'A custom song made just for them. Pair it with your card.',
+      description: 'A custom song made just for them — pairs with any design.',
     },
   },
 
   gallery: {
-    headline: 'Cards people made',
-    subtitle: 'Real cards others created — start from any one and make it yours.',
-    makeThis: 'Make this card',
+    headline: 'Designs people made',
+    subtitle: 'Real designs others created — start from any one and make it yours.',
+    makeThis: 'Make this design',
   },
+
+  // Honest "coming soon" tease for not-yet-built outputs.
+  comingSoon: [
+    'A singing-card link (the song plays)',
+    'Order prints & merch',
+  ],
 };
