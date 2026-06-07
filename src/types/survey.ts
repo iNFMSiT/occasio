@@ -1,16 +1,25 @@
-export type SurveyFieldKind =
+export type SurveyComponentKind =
   | 'chips'
   | 'sliders'
-  | 'madlib'
+  | 'madlibs'
   | 'details'
   | 'vision'
   | 'occasion';
 
 export interface SurveySection {
   id: string;
-  kind: SurveyFieldKind;
-  title: string;
+  label: string;
+  subtitle: string;
+  /** Lucide icon component — typed as unknown to avoid importing lucide-react into types. */
+  icon: unknown;
+  component: SurveyComponentKind;
   placement: 'core' | 'advanced';
+  /** Present on chips sections: the dispatch action string. */
+  action?: string;
+  /** Present on chips sections: the state key to read selections from. */
+  stateKey?: string;
+  /** Present on non-chips sections: the survey data key (null = multiple keys). */
+  dataKey?: string | null;
   config: Record<string, unknown>;
 }
 

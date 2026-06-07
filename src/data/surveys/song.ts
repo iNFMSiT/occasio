@@ -1,6 +1,7 @@
 import { SlidersHorizontal, BookOpen, User, ListMusic, Sparkles, PenLine } from 'lucide-react';
 import { Zap, Heart, Laugh } from 'lucide-react';
 import { MessageCircle, Star, Calendar } from 'lucide-react';
+import type { SurveySection } from '../../types';
 
 // Genres & vibes — moved here from the old standalone SongStyleStep so the
 // survey core can render them directly.
@@ -262,7 +263,7 @@ export const SONG_DETAIL_FIELDS = [
   },
 ];
 
-export const SONG_SURVEY_SECTIONS = [
+export const SONG_SURVEY_SECTIONS: SurveySection[] = [
   // --- Core: the simple, satisfying picks shown first ---
   {
     id: 'genre',

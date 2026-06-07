@@ -5,6 +5,7 @@ import { ART_STYLES } from '../artStyles';
 import { THEMES } from '../themes';
 import { MAD_LIBS_TEMPLATES } from '../madlibs';
 import { MVP_CONFIG } from '../../config/flags.js';
+import type { SurveySection } from '../../types';
 
 export const IMAGE_SLIDERS = [
   {
@@ -54,7 +55,7 @@ export const IMAGE_DETAIL_FIELDS = [
   },
 ];
 
-export const IMAGE_SURVEY_SECTIONS = [
+export const IMAGE_SURVEY_SECTIONS: SurveySection[] = [
   // --- Core: the simple, satisfying picks shown first ---
   {
     id: 'style',
