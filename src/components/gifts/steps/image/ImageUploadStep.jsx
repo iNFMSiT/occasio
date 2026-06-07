@@ -3,9 +3,7 @@ import { Upload, X, ArrowRight, Loader } from 'lucide-react';
 import heic2any from 'heic2any';
 import { useGiftFlow } from '../../../../context/GiftFlowContext.jsx';
 import { useToast } from '../../../../context/ToastContext.jsx';
-import geminiService from '../../../../services/geminiService.js';
-import { mockService } from '../../../../services/mockService.js';
-import { isApiConfigured } from '../../../../config/gemini.js';
+import { getImageProvider } from '../../../../services/ai';
 
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif'];
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
@@ -83,8 +81,8 @@ export default function ImageUploadStep() {
     setAnalyzing(true);
     dispatch({ type: 'SET_LOADING', payload: true });
     try {
-      const service = settings.devMode || !isApiConfigured() ? mockService : geminiService;
-      const anchor = await service.analyzeImage(images[0].file);
+      const provider = getImageProvider({ devMode: settings.devMode });
+      const anchor = await provider.analyzeImage(images[0].file);
       dispatch({ type: 'SET_ANCHOR', payload: anchor });
       addToast({ type: 'success', message: 'Photo analyzed! Moving to survey.' });
       dispatch({ type: 'NEXT_STEP' });

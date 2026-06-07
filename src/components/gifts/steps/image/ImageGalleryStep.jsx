@@ -9,9 +9,7 @@ import { shareDesign } from '../../../../services/shareCard.js';
 import CardExportModal from './CardExportModal.jsx';
 import CardFront from '../../components/CardFront.jsx';
 import { useToast } from '../../../../context/ToastContext.jsx';
-import geminiService from '../../../../services/geminiService.js';
-import { mockService } from '../../../../services/mockService.js';
-import { isApiConfigured } from '../../../../config/gemini.js';
+import { getImageProvider } from '../../../../services/ai';
 import PromptViewer from '../../../../components/common/PromptViewer.jsx';
 import RatingSlider from '../../../../components/common/RatingSlider.jsx';
 
@@ -104,7 +102,7 @@ export default function ImageGalleryStep() {
     }
   }, [cards]);
 
-  const service = settings.devMode || !isApiConfigured() ? mockService : geminiService;
+  const provider = getImageProvider({ devMode: settings.devMode });
 
   const toggleSelect = (i) => {
     const next = new Set(selected);
@@ -122,7 +120,7 @@ export default function ImageGalleryStep() {
     if (!card) return;
     setRegenerating(index);
     try {
-      const result = await service.generateImage(card.prompt, { modelTier: settings.modelTier });
+      const result = await provider.generateImage(card.prompt, { modelTier: settings.modelTier });
       dispatch({ type: 'UPDATE_CARD', payload: { index, card: { ...card, ...result } } });
       addToast({ type: 'success', message: `Card #${index + 1} regenerated!` });
     } catch (err) {

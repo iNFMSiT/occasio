@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import { Sparkles, RefreshCw, ArrowRight, ArrowLeft, Loader, Wand2, Zap, Image, Shirt, Package, Code } from 'lucide-react';
 import { useGiftFlow } from '../../../../context/GiftFlowContext.jsx';
 import { useToast } from '../../../../context/ToastContext.jsx';
-import geminiService from '../../../../services/geminiService.js';
-import { mockService } from '../../../../services/mockService.js';
 import promptEngine from '../../../../services/promptEngine.js';
-import { isApiConfigured, GEMINI_CONFIG } from '../../../../config/gemini.js';
+import { GEMINI_CONFIG } from '../../../../config/gemini.js';
+import { getImageProvider } from '../../../../services/ai';
 import sessionStore from '../../../../services/sessionStore.js';
 import PromptViewer from '../../../../components/common/PromptViewer.jsx';
 
@@ -30,7 +29,7 @@ export default function ImageGenerateStep() {
   const [showPrompts, setShowPrompts] = useState(false);
   const [peekBlueprint, setPeekBlueprint] = useState([]);
 
-  const service = settings.devMode || !isApiConfigured() ? mockService : geminiService;
+  const provider = getImageProvider({ devMode: settings.devMode });
   const cardCount = settings.cardCount || 6;
   const needsPreview = cardCount > 2;
   const previewCount = Math.min(2, cardCount);
@@ -38,8 +37,8 @@ export default function ImageGenerateStep() {
 
   const getReferenceBase64 = async () => {
     try {
-      if (images?.[0]?.file && service === geminiService) {
-        return await geminiService.fileToBase64(images[0].file);
+      if (images?.[0]?.file && provider.usesReferenceImage) {
+        return await provider.fileToBase64(images[0].file);
       }
     } catch { /* ignore */ }
     return null;
@@ -58,7 +57,7 @@ export default function ImageGenerateStep() {
       }
       const refBase64 = await getReferenceBase64();
       const previewItems = bp.slice(0, previewCount);
-      const results = await service.generateBatch(previewItems, {
+      const results = await provider.generateBatch(previewItems, {
         modelTier: settings.modelTier,
         referenceImageBase64: refBase64,
         onProgress: (p) => dispatch({ type: 'UPDATE_PROGRESS', payload: p }),
@@ -93,7 +92,7 @@ export default function ImageGenerateStep() {
         dispatch({ type: 'SET_CARDS', payload: finalCards });
         const remainingItems = bp.slice(previewCount);
         if (remainingItems.length > 0) {
-          const results = await service.generateBatch(remainingItems, {
+          const results = await provider.generateBatch(remainingItems, {
             modelTier: settings.modelTier,
             referenceImageBase64: refBase64,
             onProgress: (p) => {
@@ -104,7 +103,7 @@ export default function ImageGenerateStep() {
           dispatch({ type: 'SET_CARDS', payload: finalCards });
         }
       } else {
-        finalCards = await service.generateBatch(bp, {
+        finalCards = await provider.generateBatch(bp, {
           modelTier: settings.modelTier,
           referenceImageBase64: refBase64,
           onProgress: (p) => dispatch({ type: 'UPDATE_PROGRESS', payload: p }),
