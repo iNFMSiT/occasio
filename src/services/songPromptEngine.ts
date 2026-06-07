@@ -1,9 +1,33 @@
 // Song Prompt Engine — builds Suno-compatible prompts from survey data
-// Parallel to promptEngine.js for images
+// Parallel to promptEngine.ts for images
+
+import type { SurveyData } from '../types';
+
+/** Shape returned by buildPrompt. */
+interface SongPromptResult {
+  fullPrompt: string;
+  genres: string[];
+  vibes: string[];
+  tempo: string;
+}
+
+/** A single blueprint entry produced by createBlueprint. */
+interface SongBlueprintItem extends SongPromptResult {
+  index: number;
+  label: string;
+}
+
+/** Extended survey fields specific to the song flow (beyond base SurveyData). */
+interface SongSurveyData extends SurveyData {
+  lyricMadLibs?: Array<{ displayText: string; [key: string]: unknown }>;
+  memories?: string[];
+  insideJokes?: string[];
+  milestones?: string[];
+}
 
 class SongPromptEngine {
-  buildPrompt(surveyData, selectedGenres = [], selectedVibes = []) {
-    const parts = [];
+  buildPrompt(surveyData: SongSurveyData, selectedGenres: string[] = [], selectedVibes: string[] = []): SongPromptResult {
+    const parts: string[] = [];
 
     // Genre tags
     const genres = selectedGenres.length > 0 ? selectedGenres : ['pop'];
@@ -35,20 +59,20 @@ class SongPromptEngine {
     parts.push(`Tempo: ${tempo}`);
 
     // Lyric theme from mad libs
-    if (surveyData.lyricMadLibs?.length > 0) {
+    if (surveyData.lyricMadLibs?.length && surveyData.lyricMadLibs.length > 0) {
       const themes = surveyData.lyricMadLibs.map((ml) => ml.displayText).join('. ');
       parts.push(`Lyric themes: ${themes}`);
     }
 
     // Personal details for lyrics
-    const personalDetails = [];
-    if (surveyData.memories?.length > 0) {
+    const personalDetails: string[] = [];
+    if (surveyData.memories?.length && surveyData.memories.length > 0) {
       personalDetails.push(`Memories to reference: ${surveyData.memories.join(', ')}`);
     }
-    if (surveyData.insideJokes?.length > 0) {
+    if (surveyData.insideJokes?.length && surveyData.insideJokes.length > 0) {
       personalDetails.push(`Inside jokes to weave in: ${surveyData.insideJokes.join(', ')}`);
     }
-    if (surveyData.milestones?.length > 0) {
+    if (surveyData.milestones?.length && surveyData.milestones.length > 0) {
       personalDetails.push(`Milestones to celebrate: ${surveyData.milestones.join(', ')}`);
     }
     if (personalDetails.length > 0) {
@@ -81,8 +105,8 @@ class SongPromptEngine {
     };
   }
 
-  createBlueprint(surveyData, selectedGenres, selectedVibes, songCount = 2) {
-    const blueprints = [];
+  createBlueprint(surveyData: SongSurveyData, selectedGenres: string[], selectedVibes: string[], songCount = 2): SongBlueprintItem[] {
+    const blueprints: SongBlueprintItem[] = [];
     for (let i = 0; i < songCount; i++) {
       // Vary genres slightly across songs for variety
       const rotatedGenres = this._rotateArray(selectedGenres, i);
@@ -98,8 +122,8 @@ class SongPromptEngine {
     return blueprints;
   }
 
-  _inferVibesFromSliders(sliders) {
-    const vibes = [];
+  _inferVibesFromSliders(sliders: Record<string, number>): string[] {
+    const vibes: string[] = [];
     const energy = sliders.energy ?? 0.5;
     const sentiment = sliders.sentiment ?? 0.5;
     const humor = sliders.humor ?? 0.5;
@@ -114,7 +138,7 @@ class SongPromptEngine {
     return vibes.length > 0 ? vibes : ['upbeat'];
   }
 
-  _rotateArray(arr, offset) {
+  _rotateArray<T>(arr: T[], offset: number): T[] {
     if (!arr || arr.length === 0) return arr;
     const n = arr.length;
     const o = offset % n;

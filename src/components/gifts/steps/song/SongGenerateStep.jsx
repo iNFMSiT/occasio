@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Music, ArrowLeft, ArrowRight, Loader, Wand2, Code } from 'lucide-react';
 import { useGiftFlow } from '../../../../context/GiftFlowContext.jsx';
 import { useToast } from '../../../../context/ToastContext.jsx';
-import songPromptEngine from '../../../../services/songPromptEngine.js';
+import songPromptEngine from '../../../../services/songPromptEngine';
 import songService from '../../../../services/ai/song';
 import PromptViewer from '../../../../components/common/PromptViewer.jsx';
 

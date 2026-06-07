@@ -9,7 +9,7 @@ import { useToast } from '../../../../context/ToastContext.jsx';
 import { shareSong } from '../../../../services/shareCard.js';
 import RatingSlider from '../../../../components/common/RatingSlider.jsx';
 import songService from '../../../../services/ai/song';
-import songPromptEngine from '../../../../services/songPromptEngine.js';
+import songPromptEngine from '../../../../services/songPromptEngine';
 
 function SongCard({ song, index, onRate, onRegenerate, regenerating }) {
   const [playing, setPlaying] = useState(false);
