@@ -8,9 +8,48 @@ import { THEME_BUILDERS } from '../data/themes';
 import { MOOD_TYPES } from '../data/generation';
 import { MVP_CONFIG } from '../config/flags.js';
 import { OCCASIONS } from '../data/occasions';
+import type { SurveyData } from '../types';
+import type { BlueprintItem } from './ai/types';
+
+/** Vibes inferred from mood sliders. */
+interface VibeProfile {
+  chaos: number;
+  energy: number;
+  humor: number;
+}
+
+/** Minimal shape of a resolved mad-lib entry used during blueprint building. */
+interface MadLibEntry {
+  displayText: string;
+  templateId: string | null;
+  selections?: { style?: string; [key: string]: unknown };
+  [key: string]: unknown;
+}
+
+interface BuildPromptParams {
+  anchorDescription: string;
+  style: string;
+  theme: string;
+  composition: string;
+  mood: string;
+  surveyData: SurveyData;
+  vibeProfile: VibeProfile;
+  referenceImageIncluded: boolean;
+}
+
+interface BuildMadLibPromptParams {
+  anchorDescription: string;
+  madLib: MadLibEntry;
+  style: string;
+  composition: string;
+  mood: string;
+  surveyData: SurveyData;
+  vibeProfile: VibeProfile;
+  referenceImageIncluded: boolean;
+}
 
 // Resolve an occasion value (preset id string or { label } object) to a display label.
-function occasionLabel(occasion) {
+function occasionLabel(occasion: SurveyData['occasion']): string | null {
   if (!occasion) return null;
   if (typeof occasion === 'object') return occasion.label || null;
   const match = OCCASIONS.find((o) => o.id === occasion);
@@ -18,6 +57,8 @@ function occasionLabel(occasion) {
 }
 
 class PromptEngine {
+  blueprint: BlueprintItem[];
+
   constructor() {
     this.blueprint = [];
   }
@@ -27,8 +68,8 @@ class PromptEngine {
    * Uses ## Markdown headers (proven more effective with Gemini than ASCII delimiters).
    * Content is written as descriptive narrative, not keyword lists.
    */
-  buildPrompt({ anchorDescription, style, theme, composition, mood, surveyData, vibeProfile, referenceImageIncluded }) {
-    const sections = [];
+  buildPrompt({ anchorDescription, style, theme, composition, mood, surveyData, vibeProfile, referenceImageIncluded }: BuildPromptParams): string {
+    const sections: string[] = [];
 
     // --- Identity anchor ---
     sections.push('## Subject');
@@ -77,7 +118,7 @@ class PromptEngine {
     // --- Composition & Camera (using photographic language) ---
     sections.push('');
     sections.push('## Composition');
-    const compInstructions = {
+    const compInstructions: Record<string, string> = {
       'close-up': 'Tight close-up portrait framed from head to upper chest, shot with an 85mm portrait lens. Face fills most of the frame with a soft bokeh background.',
       'mid-shot': 'Medium shot from the waist up, balanced framing showing pose, outfit, and immediate surroundings.',
       'full-body': 'Low-angle full-body shot showing the complete figure from head to feet. Wide-angle lens perspective, dynamic confident pose with environmental context visible. The full body must be in frame.',
@@ -87,7 +128,7 @@ class PromptEngine {
     // --- Mood (concise) ---
     sections.push('');
     sections.push('## Mood');
-    const moodInstructions = {
+    const moodInstructions: Record<string, string> = {
       epic: 'Epic grandiose atmosphere with dramatic rim lighting and volumetric god rays. The character looks powerful and awe-inspiring.',
       funny: 'Humorous lighthearted vibe with bright cheerful lighting and an exaggerated comedic expression. Warm inviting colors.',
       serious: 'Serious intense atmosphere with moody directional lighting, deep shadows, and a focused determined expression.',
@@ -111,8 +152,8 @@ class PromptEngine {
    * Build a concise narrative sentence about environmental props from survey data.
    * Written as natural prose, not a bullet list.
    */
-  _buildEnvironmentProps(surveyData, theme) {
-    const details = [];
+  _buildEnvironmentProps(surveyData: SurveyData, _theme: string | null): string | null {
+    const details: string[] = [];
 
     if (surveyData.hobbies?.length) {
       const items = surveyData.hobbies.slice(0, 2).map((h) => h.toLowerCase());
@@ -133,15 +174,15 @@ class PromptEngine {
   /**
    * Build vibe modifier note from mood sliders (only when meaningful).
    */
-  _buildVibeNote(vibeProfile) {
-    const parts = [];
+  _buildVibeNote(vibeProfile: VibeProfile): string | null {
+    const parts: string[] = [];
     if (vibeProfile.chaos > 0.5) parts.push(vibeProfile.chaos > 0.7 ? 'surreal warping elements' : 'subtle surreal touches');
     if (vibeProfile.energy > 0.5) parts.push(vibeProfile.energy > 0.7 ? 'extreme dynamic motion and wind' : 'energetic action pose');
     if (vibeProfile.humor > 0.5) parts.push(vibeProfile.humor > 0.7 ? 'exaggerated comedic expression' : 'playful lighthearted tone');
     return parts.length ? `Add ${parts.join(', ')}.` : null;
   }
 
-  _getStyleLabel(styleId) {
+  _getStyleLabel(styleId: string): string {
     const style = ART_STYLES.find((s) => s.id === styleId);
     return style ? style.label.toLowerCase() : styleId;
   }
@@ -149,8 +190,8 @@ class PromptEngine {
   /**
    * Build a mad-lib prompt with the same Markdown structure.
    */
-  buildMadLibPrompt({ anchorDescription, madLib, style, composition, mood, surveyData, vibeProfile, referenceImageIncluded }) {
-    const sections = [];
+  buildMadLibPrompt({ anchorDescription, madLib, style, composition, mood, surveyData, vibeProfile, referenceImageIncluded }: BuildMadLibPromptParams): string {
+    const sections: string[] = [];
 
     sections.push('## Subject');
     if (referenceImageIncluded) {
@@ -188,7 +229,7 @@ class PromptEngine {
 
     sections.push('');
     sections.push('## Composition');
-    const compMap = {
+    const compMap: Record<string, string> = {
       'close-up': 'Close-up portrait, head and upper chest, 85mm lens with bokeh background.',
       'mid-shot': 'Medium shot from waist up, balanced framing.',
       'full-body': 'Low-angle full-body shot showing the complete figure from head to feet, dynamic pose.',
@@ -197,7 +238,7 @@ class PromptEngine {
 
     sections.push('');
     sections.push('## Mood');
-    const moodMap = {
+    const moodMap: Record<string, string> = {
       epic: 'Epic atmosphere with dramatic rim lighting and god rays.',
       funny: 'Humorous lighthearted vibe with bright colors and a comedic expression.',
       serious: 'Serious intense mood with moody directional lighting and a focused expression.',
@@ -217,17 +258,17 @@ class PromptEngine {
 
   // ---- Selection helpers ----
 
-  selectStyle(cardIndex, selectedStyles) {
+  selectStyle(cardIndex: number, selectedStyles: string[]): string {
     if (!selectedStyles.length) return 'pixar';
     return selectedStyles[cardIndex % selectedStyles.length];
   }
 
-  selectTheme(cardIndex, selectedThemes) {
+  selectTheme(cardIndex: number, selectedThemes: string[]): string {
     if (!selectedThemes.length) return 'wildcard';
     return selectedThemes[cardIndex % selectedThemes.length];
   }
 
-  selectComposition(cardIndex) {
+  selectComposition(cardIndex: number): string {
     // Weighted distribution: ~60% full-body, ~25% mid-shot, ~15% close-up
     // Users want mostly full-body shots; close-ups are overrepresented by default.
     const weighted = ['full-body', 'full-body', 'full-body', 'mid-shot', 'mid-shot', 'close-up'];
@@ -235,12 +276,12 @@ class PromptEngine {
     return weighted[cardIndex % weighted.length];
   }
 
-  selectMood(cardIndex) {
+  selectMood(cardIndex: number): string {
     const moods = Object.values(MOOD_TYPES);
     return moods[cardIndex % moods.length];
   }
 
-  extractStyleFromMadLib(madLib) {
+  extractStyleFromMadLib(madLib: MadLibEntry): string | null {
     if (madLib.selections?.style) return madLib.selections.style;
     const styleKeywords = ART_STYLES.map((s) => s.id);
     const lowerText = (madLib.displayText || '').toLowerCase();
@@ -252,12 +293,18 @@ class PromptEngine {
 
   // ---- Main blueprint creation ----
 
-  createBlueprint(anchorDescription, surveyData, selectedStyles, selectedThemes, cardCountOverride) {
+  createBlueprint(
+    anchorDescription: string,
+    surveyData: SurveyData,
+    selectedStyles: string[],
+    selectedThemes: string[],
+    cardCountOverride?: number
+  ): BlueprintItem[] {
     this.blueprint = [];
 
     const cardCount = cardCountOverride || MVP_CONFIG.CARD_COUNT;
-    const vibeProfile = surveyData.moodSliders || { chaos: 0.5, energy: 0.5, humor: 0.5 };
-    const madLibsPrompts = surveyData.madLibs || [];
+    const vibeProfile: VibeProfile = (surveyData.moodSliders as VibeProfile | undefined) || { chaos: 0.5, energy: 0.5, humor: 0.5 };
+    const madLibsPrompts: MadLibEntry[] = (surveyData.madLibs as MadLibEntry[] | undefined) || [];
     // We'll note that a reference image will be attached at generation time
     const referenceImageIncluded = true; // always true when we have an anchor
 
@@ -267,8 +314,8 @@ class PromptEngine {
       const composition = this.selectComposition(i);
       const mood = this.selectMood(i);
 
-      let prompt;
-      let madLibId = null;
+      let prompt: string;
+      let madLibId: string | null = null;
 
       if (madLibsPrompts.length > 0 && i < madLibsPrompts.length) {
         // Mad lib prompt

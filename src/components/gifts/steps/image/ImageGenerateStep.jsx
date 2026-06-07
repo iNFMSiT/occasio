@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Sparkles, RefreshCw, ArrowRight, ArrowLeft, Loader, Wand2, Zap, Image, Shirt, Package, Code } from 'lucide-react';
 import { useGiftFlow } from '../../../../context/GiftFlowContext.jsx';
 import { useToast } from '../../../../context/ToastContext.jsx';
-import promptEngine from '../../../../services/promptEngine.js';
+import promptEngine from '../../../../services/promptEngine';
 import { GEMINI_CONFIG } from '../../../../config/gemini.js';
 import { getImageProvider } from '../../../../services/ai';
 import sessionStore from '../../../../services/sessionStore.js';
