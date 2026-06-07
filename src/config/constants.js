@@ -1,17 +1,3 @@
-// Theme Categories
-export const THEMES = [
-  { id: 'celebrities', label: 'Celebrities', description: 'Transform into famous personalities' },
-  { id: 'careers', label: 'Careers', description: 'Professional roles and jobs' },
-  { id: 'time-traveler', label: 'Time Traveler/Fantasy', description: 'Historical and fantasy settings' },
-  { id: 'wildcard', label: 'Wildcard', description: 'Unexpected and creative scenarios' },
-  { id: 'sports', label: 'Sports', description: 'Athletic activities and sports' },
-  { id: 'superhero', label: 'Superhero', description: 'Comic book heroes and powers' },
-  { id: 'sci-fi', label: 'Sci-Fi', description: 'Futuristic and space themes' },
-  { id: 'fantasy', label: 'Fantasy', description: 'Magic, dragons, and fantasy worlds' },
-  { id: 'historical', label: 'Historical', description: 'Different time periods' },
-  { id: 'food', label: 'Food & Cooking', description: 'Culinary adventures' },
-];
-
 // Style Battle Options
 export const STYLE_BATTLES = [
   { id: 'action-vs-cozy', left: 'High-Octane Action', right: 'Cozy/Whimsical' },
