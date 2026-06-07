@@ -5,7 +5,7 @@ import {
 } from 'lucide-react';
 import { useGiftFlow } from '../../../../context/GiftFlowContext.jsx';
 import { fireConfetti } from '../../../../components/visual/confetti.js';
-import { shareDesign } from '../../../../services/shareCard.js';
+import { shareDesign } from '../../../../services/shareCard';
 import CardExportModal from './CardExportModal.jsx';
 import CardFront from '../../components/CardFront.jsx';
 import { useToast } from '../../../../context/ToastContext.jsx';

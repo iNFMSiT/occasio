@@ -6,7 +6,7 @@ import {
 import { useGiftFlow } from '../../../../context/GiftFlowContext.jsx';
 import { fireConfetti } from '../../../../components/visual/confetti.js';
 import { useToast } from '../../../../context/ToastContext.jsx';
-import { shareSong } from '../../../../services/shareCard.js';
+import { shareSong } from '../../../../services/shareCard';
 import RatingSlider from '../../../../components/common/RatingSlider.jsx';
 import songService from '../../../../services/ai/song';
 import songPromptEngine from '../../../../services/songPromptEngine';
