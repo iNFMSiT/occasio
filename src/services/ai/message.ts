@@ -3,7 +3,7 @@
 import geminiService from '../geminiService.js';
 import { isApiConfigured } from '../../config/gemini.js';
 import { buildMessagePrompt } from '../messagePromptEngine';
-import { mockMessageOptions } from '../mockMessageService.js';
+import { mockMessageOptions } from '../mockMessageService';
 import type { SurveyData } from '../../types';
 
 interface MessageRequest {
