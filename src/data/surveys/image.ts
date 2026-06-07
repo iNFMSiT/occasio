@@ -88,7 +88,7 @@ export const IMAGE_SURVEY_SECTIONS = [
     dataKey: 'freeText',
     config: {
       placeholder: 'e.g. riding a giant rubber duck through a neon city, holding their dog',
-      helper: "Anything specific you want to see? We'll work it in.",
+      helper: "Anything specific you want to see? We’ll work it in.",
     },
   },
 

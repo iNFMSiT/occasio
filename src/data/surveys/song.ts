@@ -289,14 +289,14 @@ export const SONG_SURVEY_SECTIONS = [
   {
     id: 'vision',
     label: "What's this song about?",
-    subtitle: "Memories, inside jokes, who it's for — in your own words. Optional.",
+    subtitle: "Memories, inside jokes, who it’s for — in your own words. Optional.",
     icon: PenLine,
     component: 'vision',
     placement: 'core',
     dataKey: 'freeText',
     config: {
-      placeholder: "e.g. for my mom's 50th — she loves gardening and always says \"easy peasy\"",
-      helper: "Tell us what makes them special and we'll weave it into the lyrics.",
+      placeholder: "e.g. for my mom’s 50th — she loves gardening and always says “easy peasy”",
+      helper: "Tell us what makes them special and we’ll weave it into the lyrics.",
     },
   },
 
