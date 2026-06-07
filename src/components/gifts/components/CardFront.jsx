@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { getTextStyle } from '../../../config/textStyles.js';
-import { loadImage, renderCardFront, ensureFontsLoaded } from '../../../services/cardExport.js';
+import { loadImage, renderCardFront, ensureFontsLoaded } from '../../../services/cardExport';
 
 // Renders the card front (image + text overlay) to a canvas using the SAME renderer
 // as the PDF, so the on-screen card matches what prints. Falls back to a plain <img>

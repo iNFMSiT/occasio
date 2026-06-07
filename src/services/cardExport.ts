@@ -14,10 +14,76 @@ import { getTextStyle } from '../config/textStyles.js';
 
 const { panelMargin } = CARD_EXPORT;
 
+// ---- domain interfaces -------------------------------------------------------
+
+type PaperSize = keyof typeof CARD_EXPORT.paper;  // 'letter' | 'a4'
+type CardFormat = 'quarterFold' | 'halfFold5x7';
+type HalfFoldSide = 'outside' | 'inside';
+type TextEffect = 'shadow' | 'outline' | 'banner' | 'none';
+type TextCase = 'upper' | 'title' | 'none';
+
+interface FrontText {
+  text?: string;
+  styleId?: string;
+  color?: string;
+  placement?: string;
+}
+
+interface CardInput {
+  imageUrl: string;
+  frontText?: FrontText;
+}
+
+interface WrappedTextOpts {
+  fontPx: number;
+  family: string;
+  style?: string;
+  color: string;
+  lineGap?: number;
+}
+
+interface DrawPanelFn {
+  (ctx: CanvasRenderingContext2D, w: number, h: number): void;
+}
+
+interface ComposePanelsOpts {
+  img: HTMLImageElement;
+  message: string;
+  frontText: FrontText | undefined;
+  showGuides: boolean;
+  ppi: number;
+}
+
+interface ComposeQuarterFoldOpts extends ComposePanelsOpts {
+  paperSize: PaperSize | string;
+}
+
+interface RenderPreviewOpts {
+  img: HTMLImageElement;
+  format: CardFormat | string;
+  paperSize: PaperSize | string;
+  message: string;
+  frontText: FrontText | undefined;
+  showGuides: boolean;
+  side?: HalfFoldSide | string;
+  maxPx?: number;
+}
+
+interface BuildCardPdfOpts {
+  card: CardInput;
+  message: string;
+  frontText: FrontText | undefined;
+  format: CardFormat | string;
+  paperSize: PaperSize | string;
+  showGuides: boolean;
+}
+
+// ---- font loading ------------------------------------------------------------
+
 // Ensure the web fonts used by a front-text style are loaded before drawing to
 // canvas — otherwise the browser silently substitutes a fallback font. Resolves
 // even if a font fails (we just draw with whatever's available).
-export async function ensureFontsLoaded(families = []) {
+export async function ensureFontsLoaded(families: string[] = []): Promise<void> {
   if (!document.fonts) return;
   try {
     await Promise.all(
@@ -29,7 +95,7 @@ export async function ensureFontsLoaded(families = []) {
   }
 }
 
-export function loadImage(src) {
+export function loadImage(src: string): Promise<HTMLImageElement> {
   return new Promise((resolve, reject) => {
     const img = new Image();
     img.onload = () => resolve(img);
@@ -38,17 +104,17 @@ export function loadImage(src) {
   });
 }
 
-export function defaultMessageForOccasion(label) {
+export function defaultMessageForOccasion(label: string): string {
   if (!label) return 'Happy Birthday!';
   return `Happy ${label}!`;
 }
 
 // ---- low-level drawing helpers (all coordinates in pixels) -----------------
 
-function setupCanvas(canvas, wIn, hIn, ppi) {
+function setupCanvas(canvas: HTMLCanvasElement, wIn: number, hIn: number, ppi: number): CanvasRenderingContext2D {
   canvas.width = Math.round(wIn * ppi);
   canvas.height = Math.round(hIn * ppi);
-  const ctx = canvas.getContext('2d');
+  const ctx = canvas.getContext('2d')!;
   ctx.fillStyle = '#ffffff';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   return ctx;
@@ -56,7 +122,7 @@ function setupCanvas(canvas, wIn, hIn, ppi) {
 
 // Run drawFn in a local coordinate space (0..w, 0..h) for a panel at (x,y).
 // When `rotated`, the panel is drawn upside-down (for quarter-fold top quadrants).
-function inPanel(ctx, x, y, w, h, rotated, drawFn) {
+function inPanel(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, rotated: boolean, drawFn: DrawPanelFn): void {
   ctx.save();
   if (rotated) {
     ctx.translate(x + w, y + h);
@@ -71,7 +137,7 @@ function inPanel(ctx, x, y, w, h, rotated, drawFn) {
   ctx.restore();
 }
 
-function drawImageCover(ctx, img, x, y, w, h) {
+function drawImageCover(ctx: CanvasRenderingContext2D, img: HTMLImageElement, x: number, y: number, w: number, h: number): void {
   const ir = img.width / img.height;
   const r = w / h;
   let dw, dh;
@@ -86,7 +152,7 @@ function drawImageCover(ctx, img, x, y, w, h) {
   ctx.restore();
 }
 
-function drawWrappedText(ctx, text, x, y, w, h, { fontPx, family, style = '', color, lineGap = 1.32 }) {
+function drawWrappedText(ctx: CanvasRenderingContext2D, text: string, x: number, y: number, w: number, h: number, { fontPx, family, style = '', color, lineGap = 1.32 }: WrappedTextOpts): void {
   const words = (text || '').trim().split(/\s+/).filter(Boolean);
   if (!words.length) return;
   ctx.save();
@@ -95,7 +161,7 @@ function drawWrappedText(ctx, text, x, y, w, h, { fontPx, family, style = '', co
   ctx.textBaseline = 'alphabetic';
   ctx.font = `${style} ${Math.round(fontPx)}px ${family}`.trim();
 
-  const lines = [];
+  const lines: string[] = [];
   let line = '';
   for (const word of words) {
     const test = line ? `${line} ${word}` : word;
@@ -114,7 +180,7 @@ function drawWrappedText(ctx, text, x, y, w, h, { fontPx, family, style = '', co
   ctx.restore();
 }
 
-function drawFoldGuide(ctx, x1, y1, x2, y2) {
+function drawFoldGuide(ctx: CanvasRenderingContext2D, x1: number, y1: number, x2: number, y2: number): void {
   const { guide } = CARD_EXPORT;
   ctx.save();
   ctx.strokeStyle = guide.color;
@@ -129,7 +195,7 @@ function drawFoldGuide(ctx, x1, y1, x2, y2) {
 
 // ---- panel content ----------------------------------------------------------
 
-function applyCase(text, kind) {
+function applyCase(text: string, kind: TextCase | string): string {
   if (kind === 'upper') return text.toUpperCase();
   if (kind === 'title') return text.replace(/\b\w/g, (c) => c.toUpperCase());
   return text;
@@ -137,12 +203,12 @@ function applyCase(text, kind) {
 
 // Draw the front headline as our own overlay layer (never the AI model), with a
 // legibility treatment so it reads on any image. Coordinates are panel-local px.
-function drawFrontText(ctx, w, h, ppi, frontText) {
+function drawFrontText(ctx: CanvasRenderingContext2D, w: number, h: number, ppi: number, frontText: FrontText | undefined): void {
   const raw = frontText?.text?.trim();
   if (!raw) return;
-  const style = getTextStyle(frontText.styleId);
-  const color = frontText.color || style.defaultColor;
-  const placement = frontText.placement || 'bottom';
+  const style = getTextStyle(frontText!.styleId);
+  const color = frontText!.color || style.defaultColor;
+  const placement = frontText!.placement || 'bottom';
   const text = applyCase(raw, style.case);
 
   const m = panelMargin * ppi;
@@ -152,7 +218,7 @@ function drawFrontText(ctx, w, h, ppi, frontText) {
   // Auto-size to fit width (shrink until the longest word fits, then wrap).
   let fontPx = 0.42 * ppi;
   const minPx = 0.16 * ppi;
-  const fontStr = (px) => `${style.weight} ${Math.round(px)}px ${style.family}`;
+  const fontStr = (px: number) => `${style.weight} ${Math.round(px)}px ${style.family}`;
   const longest = text.split(/\s+/).sort((a, b) => b.length - a.length)[0] || text;
   ctx.font = fontStr(fontPx);
   while (fontPx > minPx && ctx.measureText(longest).width > boxW) {
@@ -162,7 +228,7 @@ function drawFrontText(ctx, w, h, ppi, frontText) {
 
   // Wrap into lines.
   const words = text.split(/\s+/);
-  const lines = [];
+  const lines: string[] = [];
   let line = '';
   for (const word of words) {
     const test = line ? `${line} ${word}` : word;
@@ -174,7 +240,7 @@ function drawFrontText(ctx, w, h, ppi, frontText) {
   const lh = fontPx * 1.12;
   const blockH = lines.length * lh;
   const pad = fontPx * 0.5;
-  let top;
+  let top: number;
   if (placement === 'top') top = m + pad;
   else if (placement === 'center') top = (h - blockH) / 2;
   else top = h - m - blockH - pad;
@@ -212,7 +278,7 @@ function drawFrontText(ctx, w, h, ppi, frontText) {
   ctx.restore();
 }
 
-function frontPanel(ctx, w, h, ppi, img, frontText) {
+function frontPanel(ctx: CanvasRenderingContext2D, w: number, h: number, ppi: number, img: HTMLImageElement, frontText: FrontText | undefined): void {
   const m = panelMargin * ppi;
   drawImageCover(ctx, img, m, m, w - 2 * m, h - 2 * m);
   drawFrontText(ctx, w, h, ppi, frontText);
@@ -221,14 +287,14 @@ function frontPanel(ctx, w, h, ppi, img, frontText) {
 // Shared single renderer for the card front (image + text overlay). Used by the
 // gallery thumbnail and the message-step preview so every surface matches the PDF.
 // Caller should `await ensureFontsLoaded([...])` first for custom fonts.
-export function renderCardFront(canvas, { img, frontText, width = 600 }) {
+export function renderCardFront(canvas: HTMLCanvasElement, { img, frontText, width = 600 }: { img: HTMLImageElement; frontText: FrontText | undefined; width?: number }): void {
   // Render at the card's own 2:3 proportion (no fold panel margin) for thumbnails.
   const ratio = img.height / img.width;
   const W = Math.round(width);
   const H = Math.round(width * ratio);
   canvas.width = W;
   canvas.height = H;
-  const ctx = canvas.getContext('2d');
+  const ctx = canvas.getContext('2d')!;
   ctx.clearRect(0, 0, W, H);
   drawImageCover(ctx, img, 0, 0, W, H);
   // Treat the thumbnail as a ~5.5in-tall card so the inch-based font sizes scale.
@@ -237,7 +303,7 @@ export function renderCardFront(canvas, { img, frontText, width = 600 }) {
 
 // Render the finished design front (image + overlay) to a PNG Blob — the shareable
 // artifact. Loads the image and waits for the overlay font first.
-export async function cardFrontToBlob(card, width = 1200) {
+export async function cardFrontToBlob(card: CardInput, width = 1200): Promise<Blob | null> {
   const img = await loadImage(card.imageUrl);
   if (card.frontText?.text) await ensureFontsLoaded([getTextStyle(card.frontText.styleId).family]);
   const canvas = document.createElement('canvas');
@@ -245,7 +311,7 @@ export async function cardFrontToBlob(card, width = 1200) {
   return new Promise((resolve) => canvas.toBlob((b) => resolve(b), 'image/png'));
 }
 
-function messagePanel(ctx, w, h, ppi, message) {
+function messagePanel(ctx: CanvasRenderingContext2D, w: number, h: number, ppi: number, message: string): void {
   const m = panelMargin * ppi * 1.4;
   drawWrappedText(ctx, message, m, m, w - 2 * m, h - 2 * m, {
     fontPx: 0.27 * ppi,
@@ -255,7 +321,7 @@ function messagePanel(ctx, w, h, ppi, message) {
   });
 }
 
-function backPanel(ctx, w, h, ppi) {
+function backPanel(ctx: CanvasRenderingContext2D, w: number, h: number, ppi: number): void {
   const m = panelMargin * ppi;
   drawWrappedText(ctx, 'Made with Occasio', m, h - 0.95 * ppi, w - 2 * m, 0.4 * ppi, {
     fontPx: 0.13 * ppi,
@@ -265,12 +331,12 @@ function backPanel(ctx, w, h, ppi) {
 }
 
 // inside-left is intentionally blank (room for a handwritten note)
-function blankPanel() {}
+function blankPanel(): void {}
 
 // ---- page composition -------------------------------------------------------
 
-export function composeQuarterFold(canvas, { img, message, frontText, paperSize, showGuides, ppi }) {
-  const P = CARD_EXPORT.paper[paperSize] || CARD_EXPORT.paper.letter;
+export function composeQuarterFold(canvas: HTMLCanvasElement, { img, message, frontText, paperSize, showGuides, ppi }: ComposeQuarterFoldOpts): void {
+  const P = CARD_EXPORT.paper[paperSize as PaperSize] || CARD_EXPORT.paper.letter;
   const ctx = setupCanvas(canvas, P.width, P.height, ppi);
   const W = canvas.width;
   const H = canvas.height;
@@ -289,7 +355,7 @@ export function composeQuarterFold(canvas, { img, message, frontText, paperSize,
   inPanel(ctx, hw, hh, hw, hh, false, (c, w, h) => frontPanel(c, w, h, ppi, img, frontText)); // front
 }
 
-export function composeHalfFold(canvas, side, { img, message, frontText, showGuides, ppi }) {
+export function composeHalfFold(canvas: HTMLCanvasElement, side: HalfFoldSide | string, { img, message, frontText, showGuides, ppi }: ComposePanelsOpts): void {
   const S = CARD_EXPORT.formats.halfFold5x7.spread;
   const ctx = setupCanvas(canvas, S.width, S.height, ppi);
   const W = canvas.width;
@@ -309,13 +375,13 @@ export function composeHalfFold(canvas, side, { img, message, frontText, showGui
 
 // ---- preview (smaller scale, one page) --------------------------------------
 
-export function renderPreview(canvas, { img, format, paperSize, message, frontText, showGuides, side = 'outside', maxPx = 540 }) {
+export function renderPreview(canvas: HTMLCanvasElement, { img, format, paperSize, message, frontText, showGuides, side = 'outside', maxPx = 540 }: RenderPreviewOpts): void {
   if (format === 'halfFold5x7') {
     const S = CARD_EXPORT.formats.halfFold5x7.spread;
     const ppi = maxPx / Math.max(S.width, S.height);
     composeHalfFold(canvas, side, { img, message, frontText, showGuides, ppi });
   } else {
-    const P = CARD_EXPORT.paper[paperSize] || CARD_EXPORT.paper.letter;
+    const P = CARD_EXPORT.paper[paperSize as PaperSize] || CARD_EXPORT.paper.letter;
     const ppi = maxPx / Math.max(P.width, P.height);
     composeQuarterFold(canvas, { img, message, frontText, paperSize, showGuides, ppi });
   }
@@ -323,13 +389,13 @@ export function renderPreview(canvas, { img, format, paperSize, message, frontTe
 
 // ---- PDF build / download ---------------------------------------------------
 
-export async function buildCardPdf({ card, message, frontText, format, paperSize, showGuides }) {
+export async function buildCardPdf({ card, message, frontText, format, paperSize, showGuides }: BuildCardPdfOpts) {
   const img = await loadImage(card.imageUrl);
   // Make sure the overlay font is loaded before rasterizing, or it falls back.
   if (frontText?.text) await ensureFontsLoaded([getTextStyle(frontText.styleId).family]);
   const { jsPDF } = await import('jspdf'); // dynamic → own chunk
   const ppi = CARD_EXPORT.DPI;
-  const toJpeg = (canvas) => canvas.toDataURL('image/jpeg', 0.92);
+  const toJpeg = (canvas: HTMLCanvasElement): string => canvas.toDataURL('image/jpeg', 0.92);
 
   if (format === 'halfFold5x7') {
     const S = CARD_EXPORT.formats.halfFold5x7.spread;
@@ -343,7 +409,7 @@ export async function buildCardPdf({ card, message, frontText, format, paperSize
     return pdf;
   }
 
-  const P = CARD_EXPORT.paper[paperSize] || CARD_EXPORT.paper.letter;
+  const P = CARD_EXPORT.paper[paperSize as PaperSize] || CARD_EXPORT.paper.letter;
   const pdf = new jsPDF({ unit: 'in', format: [P.width, P.height], orientation: 'portrait' });
   const canvas = document.createElement('canvas');
   composeQuarterFold(canvas, { img, message, frontText, paperSize, showGuides, ppi });
@@ -351,7 +417,7 @@ export async function buildCardPdf({ card, message, frontText, format, paperSize
   return pdf;
 }
 
-export async function downloadCardPdf(opts) {
+export async function downloadCardPdf(opts: BuildCardPdfOpts): Promise<void> {
   const pdf = await buildCardPdf(opts);
   // Don't use jsPDF's built-in .save() — in Chrome it can deliver the blob URL
   // without a filename, saving the file with no .pdf extension. Drive the

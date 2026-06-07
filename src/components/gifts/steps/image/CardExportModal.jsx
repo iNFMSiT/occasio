@@ -10,7 +10,7 @@ import {
   downloadCardPdf,
   defaultMessageForOccasion,
   ensureFontsLoaded,
-} from '../../../../services/cardExport.js';
+} from '../../../../services/cardExport';
 import { getTextStyle } from '../../../../config/textStyles.js';
 
 function occasionLabel(occasion) {
