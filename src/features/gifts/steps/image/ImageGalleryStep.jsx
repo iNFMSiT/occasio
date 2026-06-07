@@ -3,7 +3,7 @@ import {
   Download, RefreshCw, ShoppingBag, Check, Image, Upload,
   ArrowLeft, Package, Coffee, Smartphone, Frame, Code, Printer, Share2,
 } from 'lucide-react';
-import { useGiftFlow } from '../../GiftFlowContext.jsx';
+import { useGiftFlow } from '../../../../context/GiftFlowContext.jsx';
 import { fireConfetti } from '../../../../components/visual/confetti.js';
 import { shareDesign } from '../../../../services/shareCard.js';
 import CardExportModal from './CardExportModal.jsx';

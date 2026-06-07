@@ -3,7 +3,7 @@ import {
   ArrowRight, ArrowLeft, Sparkles, Dice5,
   ChevronDown, ChevronUp, SlidersHorizontal,
 } from 'lucide-react';
-import { useGiftFlow } from '../../GiftFlowContext.jsx';
+import { useGiftFlow } from '../../../../context/GiftFlowContext.jsx';
 import SliderBank from '../../../survey/components/SliderBank.jsx';
 import MadLibBuilder from '../../../survey/components/MadLibBuilder.jsx';
 import FreeTextInputs from '../../../survey/components/FreeTextInputs.jsx';

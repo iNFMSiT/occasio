@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Clock, ArrowLeft } from 'lucide-react';
 import { ToastProvider } from './context/ToastContext.jsx';
-import { GiftFlowProvider } from './features/gifts/GiftFlowContext.jsx';
+import { GiftFlowProvider } from './context/GiftFlowContext.jsx';
 import GiftFlowContainer from './features/gifts/GiftFlowContainer.jsx';
 import GiftTypeSelector from './features/gifts/GiftTypeSelector.jsx';
 import InspirationGallery from './features/gifts/InspirationGallery.jsx';

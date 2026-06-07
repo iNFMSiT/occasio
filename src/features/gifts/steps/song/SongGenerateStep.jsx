@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Music, ArrowLeft, ArrowRight, Loader, Wand2, Code } from 'lucide-react';
-import { useGiftFlow } from '../../GiftFlowContext.jsx';
+import { useGiftFlow } from '../../../../context/GiftFlowContext.jsx';
 import { useToast } from '../../../../context/ToastContext.jsx';
 import songPromptEngine from '../../../../services/songPromptEngine.js';
 import songService from '../../../../services/songService.js';

@@ -3,7 +3,7 @@ import {
   Play, Pause, Download, RefreshCw, ArrowLeft, Upload,
   Music, ChevronDown, ChevronUp, Share2,
 } from 'lucide-react';
-import { useGiftFlow } from '../../GiftFlowContext.jsx';
+import { useGiftFlow } from '../../../../context/GiftFlowContext.jsx';
 import { fireConfetti } from '../../../../components/visual/confetti.js';
 import { useToast } from '../../../../context/ToastContext.jsx';
 import { shareSong } from '../../../../services/shareCard.js';

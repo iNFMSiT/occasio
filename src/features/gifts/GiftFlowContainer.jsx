@@ -1,5 +1,5 @@
 import React from 'react';
-import { useGiftFlow } from './GiftFlowContext.jsx';
+import { useGiftFlow } from '../../context/GiftFlowContext.jsx';
 import ModelToggle from '../../components/settings/ModelToggle.jsx';
 
 function StepIndicator() {

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { ArrowLeft, ArrowRight, Sparkles, Shuffle, Loader2, Wand2 } from 'lucide-react';
-import { useGiftFlow } from '../../GiftFlowContext.jsx';
+import { useGiftFlow } from '../../../../context/GiftFlowContext.jsx';
 import { useToast } from '../../../../context/ToastContext.jsx';
 import {
   TEXT_STYLES, TEXT_COLORS, POSITIONS, MESSAGE_TONES, getTextStyle, shuffleFrontStyle,

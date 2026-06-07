@@ -1,7 +1,7 @@
 import React, { useState, useRef, useCallback } from 'react';
 import { Upload, X, ArrowRight, Loader } from 'lucide-react';
 import heic2any from 'heic2any';
-import { useGiftFlow } from '../../GiftFlowContext.jsx';
+import { useGiftFlow } from '../../../../context/GiftFlowContext.jsx';
 import { useToast } from '../../../../context/ToastContext.jsx';
 import geminiService from '../../../../services/geminiService.js';
 import { mockService } from '../../../../services/mockService.js';

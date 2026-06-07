@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Sparkles, RefreshCw, ArrowRight, ArrowLeft, Loader, Wand2, Zap, Image, Shirt, Package, Code } from 'lucide-react';
-import { useGiftFlow } from '../../GiftFlowContext.jsx';
+import { useGiftFlow } from '../../../../context/GiftFlowContext.jsx';
 import { useToast } from '../../../../context/ToastContext.jsx';
 import geminiService from '../../../../services/geminiService.js';
 import { mockService } from '../../../../services/mockService.js';
