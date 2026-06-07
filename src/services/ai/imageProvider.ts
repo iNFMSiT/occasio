@@ -1,4 +1,4 @@
-import geminiService from '../geminiService.js';
+import geminiService from '../geminiService';
 import { mockService } from '../mockService';
 import type { ImageProvider } from './types';
 

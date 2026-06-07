@@ -1,6 +1,6 @@
 // Front-of-card message generation — real (Gemini) with offline mock fallback.
 
-import geminiService from '../geminiService.js';
+import geminiService from '../geminiService';
 import { isApiConfigured } from '../../config/gemini.js';
 import { buildMessagePrompt } from '../messagePromptEngine';
 import { mockMessageOptions } from '../mockMessageService';
