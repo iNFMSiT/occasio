@@ -5,7 +5,7 @@ import { useGiftFlow } from '../../GiftFlowContext.jsx';
 import { useToast } from '../../../../context/ToastContext.jsx';
 import geminiService from '../../../../services/geminiService.js';
 import { mockService } from '../../../../services/mockService.js';
-import { isApiConfigured } from '../../../../config/gemini.config.js';
+import { isApiConfigured } from '../../../../config/gemini.js';
 
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif'];
 const MAX_FILE_SIZE = 10 * 1024 * 1024;

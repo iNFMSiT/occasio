@@ -11,7 +11,7 @@ import CardFront from '../../components/CardFront.jsx';
 import { useToast } from '../../../../context/ToastContext.jsx';
 import geminiService from '../../../../services/geminiService.js';
 import { mockService } from '../../../../services/mockService.js';
-import { isApiConfigured } from '../../../../config/gemini.config.js';
+import { isApiConfigured } from '../../../../config/gemini.js';
 import PromptViewer from '../../../../components/PromptViewer.jsx';
 import RatingSlider from '../../../../components/RatingSlider.jsx';
 

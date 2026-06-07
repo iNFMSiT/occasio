@@ -6,7 +6,7 @@ import {
 import sessionStore from '../services/sessionStore.js';
 import PromptViewer from './PromptViewer.jsx';
 import RatingSlider from './RatingSlider.jsx';
-import { GEMINI_CONFIG } from '../config/gemini.config.js';
+import { GEMINI_CONFIG } from '../config/gemini.js';
 
 function formatDate(isoString) {
   const d = new Date(isoString);

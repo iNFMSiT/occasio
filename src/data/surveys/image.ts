@@ -4,7 +4,7 @@ import { Heart, Tv, Music } from 'lucide-react';
 import { ART_STYLES } from '../artStyles';
 import { THEMES } from '../themes';
 import { MAD_LIBS_TEMPLATES } from '../madlibs';
-import { MVP_CONFIG } from '../../config/mvp.config.js';
+import { MVP_CONFIG } from '../../config/flags.js';
 
 export const IMAGE_SLIDERS = [
   {

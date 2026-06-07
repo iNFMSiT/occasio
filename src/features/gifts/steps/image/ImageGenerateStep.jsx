@@ -5,7 +5,7 @@ import { useToast } from '../../../../context/ToastContext.jsx';
 import geminiService from '../../../../services/geminiService.js';
 import { mockService } from '../../../../services/mockService.js';
 import promptEngine from '../../../../services/promptEngine.js';
-import { isApiConfigured, GEMINI_CONFIG } from '../../../../config/gemini.config.js';
+import { isApiConfigured, GEMINI_CONFIG } from '../../../../config/gemini.js';
 import sessionStore from '../../../../services/sessionStore.js';
 import PromptViewer from '../../../../components/PromptViewer.jsx';
 

@@ -1,6 +1,6 @@
 // Direct Gemini API integration for Nanobanana image generation
 import { GoogleGenAI } from '@google/genai';
-import { GEMINI_CONFIG, isApiConfigured } from '../config/gemini.config.js';
+import { GEMINI_CONFIG, isApiConfigured } from '../config/gemini.js';
 
 // Robustly parse the model's reply into up to 3 clean message strings.
 // Handles a JSON array, fenced code blocks, or plain numbered/bulleted lines.

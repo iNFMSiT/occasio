@@ -6,7 +6,7 @@
 import { ART_STYLES, STYLE_INSTRUCTIONS } from '../data/artStyles';
 import { THEME_BUILDERS } from '../data/themes';
 import { MOOD_TYPES } from '../data/generation';
-import { MVP_CONFIG } from '../config/mvp.config.js';
+import { MVP_CONFIG } from '../config/flags.js';
 import { OCCASIONS } from '../data/occasions';
 
 // Resolve an occasion value (preset id string or { label } object) to a display label.
