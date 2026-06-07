@@ -3,7 +3,7 @@ import { Music, ArrowLeft, ArrowRight, Loader, Wand2, Code } from 'lucide-react'
 import { useGiftFlow } from '../../../../context/GiftFlowContext.jsx';
 import { useToast } from '../../../../context/ToastContext.jsx';
 import songPromptEngine from '../../../../services/songPromptEngine.js';
-import songService from '../../../../services/songService.js';
+import songService from '../../../../services/ai/song';
 import PromptViewer from '../../../../components/common/PromptViewer.jsx';
 
 const COUNT_OPTIONS = [

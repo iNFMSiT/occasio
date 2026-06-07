@@ -5,7 +5,7 @@ export interface BlueprintItem {
   theme: string;
   composition: string;
   mood: string;
-  madLibId?: string | null;
+  madLibId: string | null;
 }
 
 export interface GenerateBatchOptions {

@@ -1,12 +1,12 @@
 // Front-of-card message generation — real (Gemini) with offline mock fallback.
 
-import geminiService from './geminiService.js';
-import { isApiConfigured } from '../config/gemini.js';
-import { buildMessagePrompt } from './messagePromptEngine.js';
-import { mockMessageOptions } from './mockMessageService.js';
+import geminiService from '../geminiService.js';
+import { isApiConfigured } from '../../config/gemini.js';
+import { buildMessagePrompt } from '../messagePromptEngine.js';
+import { mockMessageOptions } from '../mockMessageService.js';
 
 /** Returns up to 3 short, on-tone front-of-card message options. */
-export async function generateMessageOptions({ occasion, tone, recipient, surveyData }) {
+export async function generateMessageOptions({ occasion, tone, recipient, surveyData }: { occasion: any; tone: any; recipient: any; surveyData: any }) {
   if (isApiConfigured()) {
     try {
       const prompt = buildMessagePrompt({ occasion, tone, recipient, surveyData });

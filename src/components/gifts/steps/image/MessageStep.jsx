@@ -5,7 +5,7 @@ import { useToast } from '../../../../context/ToastContext.jsx';
 import {
   TEXT_STYLES, TEXT_COLORS, POSITIONS, MESSAGE_TONES, getTextStyle, shuffleFrontStyle,
 } from '../../../../config/textStyles.js';
-import { generateMessageOptions } from '../../../../services/messageService.js';
+import { generateMessageOptions } from '../../../../services/ai/message';
 import { occasionLabel } from '../../../../services/messagePromptEngine.js';
 import { loadImage, renderCardFront, ensureFontsLoaded } from '../../../../services/cardExport.js';
 
