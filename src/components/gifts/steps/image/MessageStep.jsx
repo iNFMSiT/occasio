@@ -6,7 +6,7 @@ import {
   TEXT_STYLES, TEXT_COLORS, POSITIONS, MESSAGE_TONES, getTextStyle, shuffleFrontStyle,
 } from '../../../../config/textStyles.js';
 import { generateMessageOptions } from '../../../../services/ai/message';
-import { occasionLabel } from '../../../../services/messagePromptEngine.js';
+import { occasionLabel } from '../../../../services/messagePromptEngine';
 import { loadImage, renderCardFront, ensureFontsLoaded } from '../../../../services/cardExport.js';
 
 const DEFAULT_STYLE = { styleId: 'elegant', color: '#ffffff', placement: 'bottom' };

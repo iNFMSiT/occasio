@@ -1,7 +1,7 @@
 // Offline fallback for message generation (no API key). Tone-aware templates that
 // use the recipient's name. Intentionally simple but not cheesy.
 
-import { occasionLabel } from './messagePromptEngine.js';
+import { occasionLabel } from './messagePromptEngine';
 
 const withName = (name, withN, without) => (name ? withN(name) : without);
 

@@ -2,15 +2,32 @@
 // Goal: short, specific, on-tone lines that sound human — NOT Hallmark clichés.
 
 import { OCCASIONS } from '../data/occasions';
+import type { SurveyData } from '../types';
 
-export function occasionLabel(occasion) {
+/** Occasion value accepted by the engine — mirrors MessageRequest in ai/message.ts. */
+type OccasionValue = string | { label: string } | null | undefined;
+
+/** Survey data as seen by the message engine (superset of base SurveyData). */
+type MessageSurveyData = SurveyData & {
+  insideJokes?: string[];
+};
+
+/** Parameters for buildMessagePrompt — mirrors MessageRequest in ai/message.ts. */
+interface MessagePromptParams {
+  occasion?: OccasionValue;
+  tone?: string;
+  recipient?: { name: string; relationship: string };
+  surveyData?: MessageSurveyData;
+}
+
+export function occasionLabel(occasion: OccasionValue): string | null {
   if (!occasion) return null;
   if (typeof occasion === 'object') return occasion.label || null;
   const match = OCCASIONS.find((o) => o.id === occasion);
   return match ? match.label : occasion;
 }
 
-const TONE_GUIDE = {
+const TONE_GUIDE: Record<string, string> = {
   heartfelt: 'warm and genuine; emotionally sincere without being saccharine',
   funny: 'actually funny — a clever joke or gentle roast, not corny puns',
   playful: 'light, fun, a little cheeky',
@@ -19,13 +36,13 @@ const TONE_GUIDE = {
   witty: 'dry, smart, a touch of irony',
 };
 
-export function buildMessagePrompt({ occasion, tone, recipient, surveyData }) {
+export function buildMessagePrompt({ occasion, tone, recipient, surveyData }: MessagePromptParams): string {
   const occ = occasionLabel(occasion) || 'a special occasion';
-  const toneDesc = TONE_GUIDE[tone] || TONE_GUIDE.heartfelt;
+  const toneDesc = TONE_GUIDE[tone ?? ''] || TONE_GUIDE.heartfelt;
   const name = recipient?.name?.trim();
   const rel = recipient?.relationship?.trim();
 
-  const details = [];
+  const details: string[] = [];
   if (surveyData?.hobbies?.length) details.push(`they love ${surveyData.hobbies.slice(0, 2).join(' and ')}`);
   if (surveyData?.favoriteShows?.length) details.push(`into ${surveyData.favoriteShows[0]}`);
   if (surveyData?.insideJokes?.length) details.push(`inside joke: ${surveyData.insideJokes[0]}`);
