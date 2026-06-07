@@ -43,5 +43,6 @@ export interface OccasionPreset {
   moodSliders?: Record<string, number>;
   suggestedGenres?: string[];
   suggestedVibes?: string[];
-  suggestedMadLib?: string;
+  suggestedMadLib?: string | null;
+  suggestedMadLibFields?: Record<string, string>;
 }

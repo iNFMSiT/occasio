@@ -1,4 +1,4 @@
-import type { Occasion } from '../types';
+import type { Occasion, OccasionPreset } from '../types';
 
 export const OCCASIONS: Occasion[] = [
   { id: 'birthday', label: 'Birthday', emoji: '\u{1F382}' },
@@ -12,7 +12,7 @@ export const OCCASIONS: Occasion[] = [
   { id: 'custom', label: 'Custom...', emoji: '\u{270F}\u{FE0F}' },
 ];
 
-export const OCCASION_PRESETS = {
+export const OCCASION_PRESETS: Record<string, OccasionPreset> = {
   birthday: {
     moodSliders: { energy: 0.75, sentiment: 0.8, humor: 0.65 },
     suggestedGenres: ['pop', 'hip-hop', 'electronic'],
