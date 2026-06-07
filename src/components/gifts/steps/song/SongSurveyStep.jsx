@@ -1,6 +1,6 @@
 import React from 'react';
 import SurveyStep from '../shared/SurveyStep.jsx';
-import OccasionCombobox from '../../../../features/survey/components/OccasionCombobox.jsx';
+import OccasionCombobox from '../../../../components/survey/OccasionCombobox.jsx';
 import { SONG_SURVEY_SECTIONS } from '../../../../data/surveys/song';
 import { useGiftFlow } from '../../../../context/GiftFlowContext.jsx';
 

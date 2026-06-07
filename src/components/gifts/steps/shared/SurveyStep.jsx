@@ -4,12 +4,12 @@ import {
   ChevronDown, ChevronUp, SlidersHorizontal,
 } from 'lucide-react';
 import { useGiftFlow } from '../../../../context/GiftFlowContext.jsx';
-import SliderBank from '../../../../features/survey/components/SliderBank.jsx';
-import MadLibBuilder from '../../../../features/survey/components/MadLibBuilder.jsx';
-import FreeTextInputs from '../../../../features/survey/components/FreeTextInputs.jsx';
-import ChipSelect from '../../../../features/survey/components/ChipSelect.jsx';
-import VisionTextBox from '../../../../features/survey/components/VisionTextBox.jsx';
-import { pickOne, randomSliders, randomMadLib } from '../../../../features/survey/randomize.js';
+import SliderBank from '../../../../components/survey/SliderBank.jsx';
+import MadLibBuilder from '../../../../components/survey/MadLibBuilder.jsx';
+import FreeTextInputs from '../../../../components/survey/FreeTextInputs.jsx';
+import ChipSelect from '../../../../components/survey/ChipSelect.jsx';
+import VisionTextBox from '../../../../components/survey/VisionTextBox.jsx';
+import { pickOne, randomSliders, randomMadLib } from '../../../../components/survey/randomize.js';
 
 const COMPONENT_MAP = {
   chips: ({ config, value, onChange }) => (
