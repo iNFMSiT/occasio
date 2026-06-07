@@ -12,8 +12,8 @@ import { useToast } from '../../../../context/ToastContext.jsx';
 import geminiService from '../../../../services/geminiService.js';
 import { mockService } from '../../../../services/mockService.js';
 import { isApiConfigured } from '../../../../config/gemini.js';
-import PromptViewer from '../../../../components/PromptViewer.jsx';
-import RatingSlider from '../../../../components/RatingSlider.jsx';
+import PromptViewer from '../../../../components/common/PromptViewer.jsx';
+import RatingSlider from '../../../../components/common/RatingSlider.jsx';
 
 const MOCKUP_TABS = [
   { id: 'cards', label: 'Card Deck', icon: Package },

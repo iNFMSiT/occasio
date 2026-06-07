@@ -7,7 +7,7 @@ import { mockService } from '../../../../services/mockService.js';
 import promptEngine from '../../../../services/promptEngine.js';
 import { isApiConfigured, GEMINI_CONFIG } from '../../../../config/gemini.js';
 import sessionStore from '../../../../services/sessionStore.js';
-import PromptViewer from '../../../../components/PromptViewer.jsx';
+import PromptViewer from '../../../../components/common/PromptViewer.jsx';
 
 const COUNT_OPTIONS = [
   { value: 1, label: '1', desc: 'Single image', icon: Shirt, hint: 'Great for shirts, posters, phone cases' },

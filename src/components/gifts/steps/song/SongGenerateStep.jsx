@@ -4,7 +4,7 @@ import { useGiftFlow } from '../../../../context/GiftFlowContext.jsx';
 import { useToast } from '../../../../context/ToastContext.jsx';
 import songPromptEngine from '../../../../services/songPromptEngine.js';
 import songService from '../../../../services/songService.js';
-import PromptViewer from '../../../../components/PromptViewer.jsx';
+import PromptViewer from '../../../../components/common/PromptViewer.jsx';
 
 const COUNT_OPTIONS = [
   { value: 1, label: '1', desc: 'Single song' },

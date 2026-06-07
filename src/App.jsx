@@ -6,7 +6,7 @@ import GiftFlowContainer from './components/gifts/GiftFlowContainer.jsx';
 import GiftTypeSelector from './components/gifts/GiftTypeSelector.jsx';
 import InspirationGallery from './components/gifts/InspirationGallery.jsx';
 import { GIFT_TYPES } from './components/gifts/registry.js';
-import SessionHistory from './components/SessionHistory.jsx';
+import SessionHistory from './components/common/SessionHistory.jsx';
 import AmbientBackground from './components/visual/AmbientBackground.jsx';
 import ThemeSwitcher from './components/visual/ThemeSwitcher.jsx';
 

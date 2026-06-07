@@ -7,7 +7,7 @@ import { useGiftFlow } from '../../../../context/GiftFlowContext.jsx';
 import { fireConfetti } from '../../../../components/visual/confetti.js';
 import { useToast } from '../../../../context/ToastContext.jsx';
 import { shareSong } from '../../../../services/shareCard.js';
-import RatingSlider from '../../../../components/RatingSlider.jsx';
+import RatingSlider from '../../../../components/common/RatingSlider.jsx';
 import songService from '../../../../services/songService.js';
 import songPromptEngine from '../../../../services/songPromptEngine.js';
 
