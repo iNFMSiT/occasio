@@ -144,10 +144,10 @@ export const mockSunoService = {
     return {
       audioUrl: generateMockAudioUrl(),
       lyrics: generateMockLyrics(surveyData),
-      title: `Song for ${surveyData?.lyricMadLibs?.[0]?.selections?.person ?? 'You'}`,
+      title: `Song for ${surveyData?.lyricMadLibs?.[0]?.selections?.person || 'You'}`,
       duration: 15,
-      genre: prompt.genres?.join(', ') ?? 'Pop',
-      prompt: prompt.fullPrompt ?? 'Mock generated song',
+      genre: prompt.genres?.join(', ') || 'Pop',
+      prompt: prompt.fullPrompt || 'Mock generated song',
     };
   },
 
