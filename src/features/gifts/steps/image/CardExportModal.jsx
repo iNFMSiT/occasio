@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { X, Download, Loader2, Printer, Share2 } from 'lucide-react';
 import { useToast } from '../../../../context/ToastContext.jsx';
 import { shareDesign } from '../../../../services/shareCard.js';
-import { OCCASIONS } from '../../../survey/configs/occasionPresets.config.js';
+import { OCCASIONS } from '../../../../data/occasions';
 import { CARD_EXPORT } from '../../../../data/print';
 import {
   loadImage,

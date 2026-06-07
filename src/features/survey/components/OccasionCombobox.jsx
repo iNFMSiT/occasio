@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { PartyPopper, X, Search } from 'lucide-react';
-import { OCCASIONS, OCCASION_PRESETS } from '../configs/occasionPresets.config.js';
+import { OCCASIONS, OCCASION_PRESETS } from '../../../data/occasions';
 
 // Single smart field: pick a common occasion or type your own.
 // Contract preserved from the old OccasionPicker:

@@ -1,7 +1,7 @@
 // Builds the prompt for AI front-of-card message generation.
 // Goal: short, specific, on-tone lines that sound human — NOT Hallmark clichés.
 
-import { OCCASIONS } from '../features/survey/configs/occasionPresets.config.js';
+import { OCCASIONS } from '../data/occasions';
 
 export function occasionLabel(occasion) {
   if (!occasion) return null;

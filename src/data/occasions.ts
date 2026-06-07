@@ -1,4 +1,6 @@
-export const OCCASIONS = [
+import type { Occasion } from '../types';
+
+export const OCCASIONS: Occasion[] = [
   { id: 'birthday', label: 'Birthday', emoji: '\u{1F382}' },
   { id: 'anniversary', label: 'Anniversary', emoji: '\u{1F495}' },
   { id: 'graduation', label: 'Graduation', emoji: '\u{1F393}' },
