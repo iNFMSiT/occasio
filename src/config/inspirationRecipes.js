@@ -3,7 +3,7 @@
 //   HALL_OF_FAME — "Make this" examples. Each has a face-agnostic `recipe`
 //                  (style + theme + free-text vision + sliders) that pre-fills
 //                  the image flow. recipe ids MUST match ART_STYLES / THEMES in
-//                  src/config/constants.js.
+//                  src/data/artStyles.ts / src/data/themes.ts.
 //   SHOWCASE     — pure eye-candy from the BEST set. No recipe, no button.
 //
 // Images are imported as modules so Vite bundles only what's referenced
