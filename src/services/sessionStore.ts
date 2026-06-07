@@ -1,15 +1,68 @@
 // IndexedDB-backed session store for persisting generated images
 // Uses two object stores: sessions (metadata) and images (blobs keyed by sessionId + index)
 
+// ---- domain interfaces --------------------------------------------------------
+
+interface SessionRecord {
+  id: string;
+  createdAt: string;
+  modelTier: string;
+  cardCount: number;
+  styles: string[];
+  themes: string[];
+  anchorDescription: string | null;
+  imageCount: number;
+  thumbnailUrl: string | null;
+}
+
+interface ImageRecord {
+  id: string;
+  sessionId: string;
+  index: number;
+  imageUrl: string | null;
+  style: string;
+  theme: string;
+  prompt: string;
+  composition: string;
+  mood: string;
+  rating: number | null;
+}
+
+interface CardInput {
+  imageUrl?: string;
+  style?: string;
+  theme?: string;
+  prompt?: string;
+  composition?: string;
+  mood?: string;
+  rating?: number | null;
+}
+
+interface SaveSessionParams {
+  cards: CardInput[];
+  modelTier: string;
+  cardCount: number;
+  styles: string[];
+  themes: string[];
+  anchorDescription?: string;
+}
+
+interface StoreStats {
+  sessionCount: number;
+  totalImages: number;
+}
+
+// ---- DB open -----------------------------------------------------------------
+
 const DB_NAME = 'customcards';
 const DB_VERSION = 1;
 
-function openDB() {
+function openDB(): Promise<IDBDatabase> {
   return new Promise((resolve, reject) => {
     const request = indexedDB.open(DB_NAME, DB_VERSION);
 
     request.onupgradeneeded = (e) => {
-      const db = e.target.result;
+      const db = (e.target as IDBOpenDBRequest).result;
 
       // Sessions store: one record per generation run
       if (!db.objectStoreNames.contains('sessions')) {
@@ -46,7 +99,7 @@ const sessionStore = {
    * @param {string} [params.anchorDescription] - Vision model description of the uploaded person
    * @returns {Promise<string>} The session ID
    */
-  async saveSession({ cards, modelTier, cardCount, styles, themes, anchorDescription }) {
+  async saveSession({ cards, modelTier, cardCount, styles, themes, anchorDescription }: SaveSessionParams): Promise<string> {
     const db = await openDB();
     const sessionId = makeId();
     const now = new Date();
@@ -106,7 +159,7 @@ const sessionStore = {
    * Get all sessions, newest first.
    * @returns {Promise<Array>} Session metadata objects
    */
-  async getSessions() {
+  async getSessions(): Promise<SessionRecord[]> {
     const db = await openDB();
     const tx = db.transaction('sessions', 'readonly');
     const store = tx.objectStore('sessions');
@@ -116,7 +169,7 @@ const sessionStore = {
       request.onsuccess = () => {
         db.close();
         // Reverse so newest is first
-        resolve(request.result.reverse());
+        resolve((request.result as SessionRecord[]).reverse());
       };
       request.onerror = () => {
         db.close();
@@ -130,7 +183,7 @@ const sessionStore = {
    * @param {string} sessionId
    * @returns {Promise<Array>} Image objects sorted by index
    */
-  async getSessionImages(sessionId) {
+  async getSessionImages(sessionId: string): Promise<ImageRecord[]> {
     const db = await openDB();
     const tx = db.transaction('images', 'readonly');
     const store = tx.objectStore('images');
@@ -140,7 +193,7 @@ const sessionStore = {
       const request = index.getAll(sessionId);
       request.onsuccess = () => {
         db.close();
-        resolve(request.result.sort((a, b) => a.index - b.index));
+        resolve((request.result as ImageRecord[]).sort((a, b) => a.index - b.index));
       };
       request.onerror = () => {
         db.close();
@@ -153,7 +206,7 @@ const sessionStore = {
    * Delete a session and all its images.
    * @param {string} sessionId
    */
-  async deleteSession(sessionId) {
+  async deleteSession(sessionId: string): Promise<void> {
     const db = await openDB();
 
     // Delete images first
@@ -161,9 +214,9 @@ const sessionStore = {
     const imageStore = txImages.objectStore('images');
     const imageIndex = imageStore.index('sessionId');
 
-    const imageKeys = await new Promise((resolve, reject) => {
+    const imageKeys = await new Promise<IDBValidKey[]>((resolve, reject) => {
       const req = imageIndex.getAllKeys(sessionId);
-      req.onsuccess = () => resolve(req.result);
+      req.onsuccess = () => resolve(req.result as IDBValidKey[]);
       req.onerror = () => reject(req.error);
     });
 
@@ -192,15 +245,15 @@ const sessionStore = {
    * @param {number} imageIndex
    * @param {number|null} rating - The rating value (-5 to +5) or null to clear
    */
-  async updateImageRating(sessionId, imageIndex, rating) {
+  async updateImageRating(sessionId: string, imageIndex: number, rating: number | null): Promise<void> {
     const db = await openDB();
     const id = `${sessionId}_${imageIndex}`;
     const tx = db.transaction('images', 'readwrite');
     const store = tx.objectStore('images');
 
-    const existing = await new Promise((resolve, reject) => {
+    const existing = await new Promise<ImageRecord | undefined>((resolve, reject) => {
       const req = store.get(id);
-      req.onsuccess = () => resolve(req.result);
+      req.onsuccess = () => resolve(req.result as ImageRecord | undefined);
       req.onerror = () => reject(req.error);
     });
 
@@ -219,7 +272,7 @@ const sessionStore = {
   /**
    * Get total storage usage estimate (number of sessions and approximate size).
    */
-  async getStats() {
+  async getStats(): Promise<StoreStats> {
     const sessions = await this.getSessions();
     return {
       sessionCount: sessions.length,

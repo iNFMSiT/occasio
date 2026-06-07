@@ -3,7 +3,7 @@ import {
   X, Clock, Download, ChevronDown, ChevronUp, Trash2, Image,
   Zap, Calendar, Layers,
 } from 'lucide-react';
-import sessionStore from '../../services/sessionStore.js';
+import sessionStore from '../../services/sessionStore';
 import PromptViewer from './PromptViewer.jsx';
 import RatingSlider from './RatingSlider.jsx';
 import { GEMINI_CONFIG } from '../../config/gemini.js';
