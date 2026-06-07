@@ -4,9 +4,21 @@ import geminiService from '../geminiService.js';
 import { isApiConfigured } from '../../config/gemini.js';
 import { buildMessagePrompt } from '../messagePromptEngine.js';
 import { mockMessageOptions } from '../mockMessageService.js';
+import type { SurveyData } from '../../types';
+
+interface MessageRequest {
+  /** Occasion id string or object with a label; null/undefined = generic. */
+  occasion?: string | { label: string } | null;
+  /** Tone key: 'heartfelt' | 'funny' | 'playful' | 'romantic' | 'sincere' | 'witty' */
+  tone?: string;
+  /** Card recipient — name and relationship used for personalisation. */
+  recipient?: { name: string; relationship: string };
+  /** Full survey answers forwarded to the prompt engine for extra detail. */
+  surveyData?: SurveyData;
+}
 
 /** Returns up to 3 short, on-tone front-of-card message options. */
-export async function generateMessageOptions({ occasion, tone, recipient, surveyData }: { occasion: any; tone: any; recipient: any; surveyData: any }) {
+export async function generateMessageOptions({ occasion, tone, recipient, surveyData }: MessageRequest): Promise<string[]> {
   if (isApiConfigured()) {
     try {
       const prompt = buildMessagePrompt({ occasion, tone, recipient, surveyData });
