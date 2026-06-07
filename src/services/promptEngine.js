@@ -5,7 +5,7 @@
 
 import { ART_STYLES, STYLE_INSTRUCTIONS } from '../data/artStyles';
 import { THEME_BUILDERS } from '../data/themes';
-import { COMPOSITION_TYPES, MOOD_TYPES } from '../config/constants.js';
+import { COMPOSITION_TYPES, MOOD_TYPES } from '../data/generation';
 import { MVP_CONFIG } from '../config/mvp.config.js';
 import { OCCASIONS } from '../features/survey/configs/occasionPresets.config.js';
 

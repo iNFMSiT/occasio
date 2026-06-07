@@ -17,37 +17,6 @@ export const MYSTERY_BOXES = [
   { id: 'random', label: 'The Random Box', description: 'A mix of all themes - surprise me!' },
 ];
 
-// Card Composition Types
-export const COMPOSITION_TYPES = {
-  CLOSE_UP: 'close-up',
-  MID_SHOT: 'mid-shot',
-  FULL_BODY: 'full-body',
-};
-
-// Mood Types
-export const MOOD_TYPES = {
-  EPIC: 'epic',
-  FUNNY: 'funny',
-  SERIOUS: 'serious',
-  ABSTRACT: 'abstract',
-};
-
-// Diversity Constraints
-export const DIVERSITY_CONSTRAINTS = {
-  MAX_COLOR_DOMINANCE: 10, // Max cards with same dominant color
-  COMPOSITION_TARGETS: {
-    [COMPOSITION_TYPES.CLOSE_UP]: 15,
-    [COMPOSITION_TYPES.MID_SHOT]: 20,
-    [COMPOSITION_TYPES.FULL_BODY]: 17,
-  },
-  MOOD_DISTRIBUTION: {
-    [MOOD_TYPES.EPIC]: 13,
-    [MOOD_TYPES.FUNNY]: 13,
-    [MOOD_TYPES.SERIOUS]: 13,
-    [MOOD_TYPES.ABSTRACT]: 13,
-  },
-};
-
 // API Endpoints
 export const API_ENDPOINTS = {
   VISION_ANALYSIS: '/api/vision/analyze',
